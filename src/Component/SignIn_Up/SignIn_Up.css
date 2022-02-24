@@ -1,0 +1,10 @@
+#bg-container{
+    height: fit-content;
+    background-color: #f5f5f5;
+}
+
+.sign-container{
+    display: flex;
+    padding-top: 20px;
+    justify-content: center;
+}

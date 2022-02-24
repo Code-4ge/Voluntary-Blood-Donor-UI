@@ -1,0 +1,44 @@
+.Request {
+    height: fit-content;
+    background-color: #f3f3f3;
+    padding: 70px;
+  }
+  
+  .Request section {
+    text-align: center;
+  }
+  
+  .Request h2 {
+    font-weight: bold;
+  }
+  .Request h2 span:nth-child(1) {
+    text-decoration-line: underline !important;
+    text-decoration-color: #ea0000;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 8px;
+  }
+  .Request h2 span:nth-child(2) {
+    color: #ea0000;
+  }
+  
+  .ReqData form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 50px 10%;
+  }
+  
+  .ReqData input {
+    width: 300px;
+    margin: 20px;
+    padding: 0 4px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+  }
+  
+  ::placeholder {
+    color: #1d1d1d;
+    opacity: 1;
+  }
+  

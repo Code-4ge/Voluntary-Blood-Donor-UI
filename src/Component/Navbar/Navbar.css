@@ -1,0 +1,132 @@
+nav{
+    width: auto;
+    height: fit-content;
+    padding: 15px 100px;
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    background-color: white;
+}
+
+nav img{
+    width: 200px;
+    height: 35px;
+}
+
+.sidenav{
+    width: auto;
+    height: fit-content;
+}
+
+.sidenav button{
+    padding: 6px 25px;
+    margin: 4px 10px 0;
+    cursor: pointer;
+    color: #ea0000;
+    font-weight: bold;
+    border: 1px solid #ed0000;
+    box-sizing: border-box;
+    border-radius: 3px;
+    background-color: transparent;
+}
+
+.sidenav button:nth-of-type(2){
+    color: whitesmoke;
+    border: none;
+    background-color: #ea0000;
+}
+
+.sidenav button:nth-of-type(1):hover{
+    background-color: #ea000017;
+}
+
+
+
+
+
+
+
+
+/* .sidenav a{
+    margin-right: 60px;
+    line-height: 55px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #f30000;
+    display: block;
+}
+
+.sidenav a:hover{
+    color: black;
+}
+
+.sidenav button{
+    width: 200px;
+    height: 35px;
+    padding: 5px 15px;
+    margin: auto 50px auto 35%;
+    background-color: #f30000;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 8px 6px -4px grey;
+}
+
+
+.sidenav .closebtn{
+    display: none;
+}
+
+.openbtn{
+    color: black;
+    display: none;
+}
+
+@media screen and (max-width: 800px)
+{
+    .sidenav{
+        width: 0;
+        height: 100%;
+        position: fixed;
+        display: block;
+        z-index: 1;
+        padding-top: 65px;
+        overflow-x: hidden;
+        text-align: center;
+        background-color: black;
+    }
+    .sidenav a{
+        margin: 25px 10px 40px 0;
+        font-size: 20px;
+        color: white;
+    }
+    .sidenav a:hover{
+        color: red;
+    }
+    .sidenav .closebtn{
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        right: 30px;
+        font-size: 36px;
+        margin-left: 50px;
+        display: block;
+    }
+    .sidenav button{
+        margin: 0 !important;
+        box-shadow: none;
+    }
+    nav img {
+        width: 170px;
+        height: 50px;
+        margin: 10px 0 0 20px;
+    }
+    .openbtn {
+        cursor: pointer;
+        font-size: 30px;
+        padding: 0%;
+        margin: 20px 50px 0 0;
+        display: block;
+    }
+} */

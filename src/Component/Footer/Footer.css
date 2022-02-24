@@ -1,0 +1,52 @@
+.footer{
+    height: fit-content;
+    padding: 70px;
+    background-color: rgb(27, 27, 27);
+    color: whitesmoke;
+}
+
+.footersec{
+    display: flex;
+    justify-content: space-between;
+}
+
+#upfooter i{
+    cursor: pointer;
+    font-size: 25px;
+    margin: 0 10px;
+}
+
+#upfooter i:nth-child(1):hover{
+    color:#1877f2;
+}
+#upfooter i:nth-child(2):hover{
+    color: #e1306c;
+}
+#upfooter i:nth-child(3):hover{
+    color:#dd4b39;
+}
+#upfooter i:nth-child(4):hover{
+    color: #0088cc;
+}
+
+#downfooter p{
+    font-size: 12px;
+    color: whitesmoke;
+    margin: 0;
+}
+#downfooter section a{
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600px;
+    margin: 0 15px;
+    color: #c2bfbf;
+    text-decoration: none;
+}
+#downfooter section a:hover{
+    color: #ffffff;
+}
+
+.footer hr{
+    color: #9c9c9c;
+    opacity: 1;
+}

@@ -1,0 +1,76 @@
+import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
+import { useParams } from 'react-router-dom';
+import RegistrationService from '../../Service/RegistrationService';
+
+
+function VerifyAccount() {
+
+    const { token } = useParams();
+
+    const [isConfirm, setConfirm] = useState(null);
+    const [Loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetch = async (token) => {
+            setLoading(true);
+            setConfirm(null);
+            try{
+                const response = await RegistrationService.getEmailVerification(token);
+                console.log(response.data);
+                if(response.data === "confirmed")
+                    setConfirm(true);
+                else
+                    setConfirm(false);
+            }
+            catch(error){
+              console.log(error);
+              setConfirm(false);
+            }
+            setLoading(false);
+      };
+      fetch(token);
+    }, [token]);
+    
+
+    const template = (isConfirm) => {
+
+        var icon = 'error';
+        var title = 'Confirmation failed!';
+        var text = 'There might be some issue with your account please register again.';
+        var url = '/SignUp';
+
+        if(isConfirm)
+        {
+            icon = 'success';
+            title = 'Good job!';
+            text = 'Your have successfully registered as BConnect Donor.';
+            url = '/SignIn';
+        }
+        Swal.fire({
+            icon: icon,
+            title: title,
+            text: text,
+            confirmButtonText: 'OK',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            focusConfirm: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.replace(url);
+            }
+        });
+    }
+
+    return Loading ? (
+        <div></div>
+    ):(
+        <>
+            {template(isConfirm)}
+        </>
+    );
+
+}
+
+export default VerifyAccount;
+

@@ -1,0 +1,54 @@
+.faqcard {
+    padding: 70px 0;
+    text-align: center;
+    background-position: center;
+    background-repeat: repeat;
+    background-size: 450px;
+  }
+  
+.faqcard h2 {
+    margin: 0px;
+    font-size: 40px;
+}
+
+.faqcard hr {
+	width: 95px;
+	height: 4px;
+	margin: 0px auto 20px auto;
+	background-color: #ea0000;
+	opacity: 1;
+	border: none;
+}
+
+.quescard {
+	padding: 50px 50px 0 50px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+
+.ques {
+	width: 500px;
+	height: fit-content;
+	padding: 10px;
+	margin: 20px 0;
+	text-align: left;
+	background-color: #ffffff;
+	border: 1px solid #cdcdcd;
+}
+.ques i {
+	color: #ea0000;
+	margin: 0 20px 0 0;
+}
+
+.ques .faqAns{
+	text-align: justify;
+	font-size: 15px;
+	margin-top: 10px;
+	color: #696969;
+	display: none;
+}
+
+.ques:hover .faqAns{
+	display: block;
+}
