@@ -1,7 +1,7 @@
 nav{
     width: auto;
     height: fit-content;
-    padding: 10px 100px;
+    padding: 7px 100px;
     display: flex;
     text-align: center;
     justify-content: space-between;
@@ -10,7 +10,7 @@ nav{
 
 nav img{
     width: 180px;
-    height: 30px;
+    height: 35px;
 }
 
 .sidenav{

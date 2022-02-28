@@ -36,7 +36,7 @@ export const Header = () => {
 				<section className='serviceBtn'>
 					<button>Find A Blood Donor &nbsp; &#10095;</button><br/>
 					<button>Post Blood Request &nbsp; &#10095;</button><br/>
-					<button>Service Organisation (Comming Soon)</button><br/>
+					{/* <button>Service Organisation (Comming Soon)</button><br/> */}
 				</section>
 			</div>
 			<div className='head_Img'>
