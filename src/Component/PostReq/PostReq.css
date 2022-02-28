@@ -1,6 +1,7 @@
 .curPost{
     width: 300px;
     height: 400px;
+    margin-top: 15px;
     color: whitesmoke;
     border-radius: 10px;
     border: 1px solid #5f5f5f;

@@ -1,10 +1,30 @@
 #bg-container{
     height: fit-content;
+    padding: 80px 0 50px 0;
     background-color: #f5f5f5;
 }
 
-.sign-container{
+.login-container{
     display: flex;
     padding-top: 20px;
     justify-content: center;
+}
+
+.register{
+    padding: 100px 150px 50px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    column-gap: 100px;
+    background-color: white;
+}
+
+.register .reg_info{
+    width: 650px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.reg_info p{
+    text-align: justify;
+    color: gray;
 }

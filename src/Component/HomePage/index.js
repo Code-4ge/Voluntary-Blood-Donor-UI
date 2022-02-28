@@ -18,7 +18,14 @@ export const Header = () => {
 	return (
 		<>
 		<svg style={Height} id='header_bg' className='homebg' viewBox="0 0 500 80" preserveAspectRatio="none">
-  			<path d="M0,0 L0,55 Q250,65 500,55 L500,0 Z" fill="#e2fafa" />
+			<defs>
+				<radialGradient id="Gradient"
+						cx="0.5" cy="0.5" r="0.5" fx="0.75" fy="0.25">
+					<stop offset="0%" stop-color="#07365d"/>
+					<stop offset="100%" stop-color="#000717"/>
+				</radialGradient>
+			</defs>
+  			<path d="M0,0 L0,55 Q250,65 500,55 L500,0 Z" fill="url(#Gradient)"/>{/*fill="#e2fafa"*/}
 		</svg>
 		<div ref={header_height} id='header' className="header">
 			<div className='title'>
@@ -29,10 +36,13 @@ export const Header = () => {
 				<section className='serviceBtn'>
 					<button>Find A Blood Donor &nbsp; &#10095;</button><br/>
 					<button>Post Blood Request &nbsp; &#10095;</button><br/>
-					{/* <button>Service Organisation (Comming Soon)</button><br/> */}
+					<button>Service Organisation (Comming Soon)</button><br/>
 				</section>
 			</div>
-			<img src={process.env.PUBLIC_URL + '/assets/header.jpg'} alt="donate now" />
+			<div className='head_Img'>
+				<img className='bldrop' src={process.env.PUBLIC_URL + '/assets/bldrop.png'} />
+				<img src={process.env.PUBLIC_URL + '/assets/hand.png'}/>
+			</div>
 		</div>
 		</>
 	);
