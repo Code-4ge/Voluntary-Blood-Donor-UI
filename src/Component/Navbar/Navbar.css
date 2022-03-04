@@ -42,6 +42,28 @@ nav img{
 
 
 
+.auth_menu{
+    text-align: center;
+    background-color: white;
+}
+
+.auth_menu section{
+    padding: 5px 0;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+
+.auth_menu .item{
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #636363;
+}
+
+.auth_menu .item:hover{
+    color: #c6414c;
+}
 
 
 
