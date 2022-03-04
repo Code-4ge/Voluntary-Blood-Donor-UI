@@ -4,8 +4,14 @@ const REGISTRATION_API_BASE_URL = "http://localhost:8080/api/signup";
 
 class RegistrationService{
 
-    registerDonor(Donor){
-        return axios.post(REGISTRATION_API_BASE_URL, Donor);
+    registerDonor(credential, detail, address){
+        console.log(credential, detail, address);
+        return axios.post(REGISTRATION_API_BASE_URL, 
+        {
+            credential:credential,
+            detail:detail,
+            address:address
+        });
     }
 
     getEmailVerification(token)

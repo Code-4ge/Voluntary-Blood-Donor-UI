@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
@@ -14,6 +15,15 @@ import MuiAlert from '@mui/material/Alert';
 import PasswordTwoToneIcon from '@mui/icons-material/PasswordTwoTone';
 import AbcTwoToneIcon from '@mui/icons-material/AbcTwoTone';
 import InputAdornment from '@mui/material/InputAdornment';
+import DatePicker from '@mui/lab/DatePicker';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import PropTypes from "prop-types";
+import { IMaskInput } from "react-imask";
 import "./SignIn_Up.css";
 import { useState } from "react";
 import RegistrationService from "../../Service/RegistrationService";
@@ -22,32 +32,79 @@ import { Snackbar } from "@mui/material";
 
 
 
+const TextMaskCustom = React.forwardRef(function TextMaskCustom(props, ref) {
+    const { onChange, ...other } = props;
+    return (
+      <IMaskInput
+        {...other}
+        mask="+91 00000 00000"
+        definitions={{
+          "#": /[1-9]/
+        }}
+        inputRef={ref}
+        onAccept={(value) => onChange({ target: { name: props.name, value } })}
+        overwrite
+      />
+    );
+});
+  
+TextMaskCustom.propTypes = {
+    name: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired
+};
+
+
+
   
 
 export default function SignUp() {
 
     const [errorMsg, setErrorMsg] = useState()
-    const [Donor, setDonor] = useState({
+    const [Credential, setCredential] = useState({
+        username:"",
+        password:"",
+    });
+    const [Detail, setDetail] = useState({
         firstName:"",
         lastName:"",
-        username:"",
-        password:""
+        DoB:null,
+        bloodGroup:"",
+        phone:"",
+        LDD:null,
+        gender:"",
     });
+    const [Address, setAddress] = useState({
+        line1:"",
+        landmark:"",
+        city:"",
+        state:"",
+        pin:"",
+    });
+
     const [showPassword, setShowPassword] = useState(false);
     const [Spinner, setSpinner] = useState(false);
     const [Alert, setAlert] = useState(false);
 
-    
-    const handleChange = (e) => {
-        e.persist();
-        setDonor({...Donor, [e.target.name] : e.target.value});
-    }
+    const BlTypes = [ 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+
+    const Genders = [ 'Male', 'Female', 'Unisex'];
+
+
+    // const handleChange = (e) => {
+    //     e.persist(); setDonor({...Donor, [e.target.name] : e.target.value});
+    // }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setSpinner(true);
+        var user = {
+            credential:Credential,
+            detail:Detail,
+            address:Address
+        }
+        console.log(user);
         // TODO check validation
-        RegistrationService.registerDonor(Donor).then((response)=>{
+        RegistrationService.registerDonor(Credential, Detail, Address).then((response)=>{
             console.log(response)
             setSpinner(false);
             Swal.fire({
@@ -55,7 +112,7 @@ export default function SignUp() {
                 imageHeight: '200',
                 imageWidth: '250',
                 title: "You're almost there!",
-                html: "<i>"+Donor.email+"</i> <br> Head over to your inbox to confirm your email and finish your account creation!",
+                html: "<i>"+Credential.username+"</i> <br> Head over to your inbox to confirm your email and finish your account creation!",
                 confirmButtonText: 'OK',
                 allowOutsideClick: false,
                 allowEscapeKey: false,
@@ -97,47 +154,100 @@ export default function SignUp() {
                     </Snackbar>
                     <Card sx={{ width:"fit-content", padding:"15px", boxShadow:"0 -5px 5px -5px rgba(0, 0, 0, 0.2), 0 5px 5px -5px rgba(0, 0, 0, 0.2)"}}>
                         <CardContent>
-                            <Box component="form" onSubmit={handleSubmit} Validate sx={{ mt: 2, }}>
-                                <Grid container spacing={2}>
-                                    <Grid item sm={6}>
-                                        <TextField autoComplete="given-name" name="firstName" required fullWidth id="firstName" label="First Name" color='error' onChange={(e) => handleChange(e)} autoFocus />
-                                    </Grid>
-                                    <Grid item sm={6}>
-                                        <TextField required fullWidth id="lastName" label="Last Name" name="lastName" color='error' onChange={(e) => handleChange(e)}  autoComplete="family-name" />
-                                    </Grid>
-                                </Grid>
-                                <Grid container spacing={2} mt={0.3}>
-                                    <Grid item xs={12}>
-                                        <TextField required fullWidth id="username" label="Email Address" name="username" color='error' onChange={(e) => handleChange(e)}  autoComplete="email" />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <TextField 
-                                            id="password" 
-                                            type={showPassword ? 'text' : 'password'} 
-                                            required 
-                                            fullWidth 
-                                            name="password" 
-                                            color='error'
-                                            onChange={(e) => handleChange(e)}  
-                                            label="Password" 
-                                            autoComplete="new-password" 
-                                            InputProps={{
-                                                endAdornment: <InputAdornment position="end">
-                                                        <div style={{cursor:'pointer'}} onClick={handleClickShowPassword}>
-                                                            {showPassword ? <PasswordTwoToneIcon/> : <AbcTwoToneIcon sx={{fontSize:'30px'}}/> }
-                                                        </div>
-                                                    </InputAdornment>,
-                                                }}
+                            <Box component="form" onSubmit={handleSubmit} Validate sx={{ mt: 2, width:'400px'}}>
+                                <div className='form_grid'>
+                                    <TextField id="firstName" label="First Name" name="firstName" value={Detail.firstName} style={{gridArea:'FName'}} autoComplete="given-name" color='error' fullWidth required autoFocus 
+                                        onChange={(e) => {e.persist(); setDetail({...Detail, [e.target.name] : e.target.value});}} /> 
+
+                                    <TextField id="lastName" label="Last Name" name="lastName" value={Detail.lastName} style={{gridArea:'LName'}} autoComplete="family-name" color='error' fullWidth required 
+                                        onChange={(e) => {e.persist(); setDetail({...Detail, [e.target.name] : e.target.value});}} />
+
+                                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                        <DatePicker label="Date of Birth" inputFormat="dd/MM/yyyy" value={Detail.DoB} openTo="year" views={["year", "month", "day"]}
+                                            onChange={(newDate) => {
+                                                setDetail({...Detail, DoB:newDate});
+                                            }}
+                                            renderInput={(params) => (
+                                                <TextField {...params} style={{gridArea:'DOB'}} color="error" required />
+                                            )}
                                         />
-                                    </Grid>
-                                </Grid>
+                                    </LocalizationProvider>
+
+                                    <FormControl style={{gridArea:'BlGroup'}} fullWidth>
+                                        <InputLabel id="Bl-group-label" color='error' required>Blood Group</InputLabel>
+                                        <Select id="Blood-group" labelId="Bl-group-label" name="bloodGroup" label="Blood Group*" value={Detail.bloodGroup} color='error' required 
+                                            onChange={(e) => {setDetail({...Detail, [e.target.name] : e.target.value});}}>
+                                            {BlTypes.map((name) => (
+                                                <MenuItem key={name} value={name} >{name}</MenuItem>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
+
+                                    <TextField id="phone"  label="Mobile Number"  name="phone" value={Detail.phone} style={{gridArea:'Phone'}}  color='error'  autoComplete="phone" placeholder="Enter Whatsapp Number *" fullWidth required 
+                                        onChange={(e) => {setDetail({...Detail, [e.target.name] : e.target.value});}} 
+                                        InputProps={{
+                                            inputComponent: TextMaskCustom
+                                        }}
+                                    />
+
+                                    <FormControl style={{gridArea:'Gender'}} fullWidth>
+                                        <InputLabel id="gender-label" color='error' required>Gender</InputLabel>
+                                        <Select id="Gender" labelId="gender-label" name="gender" label="Gender*" value={Detail.gender} color='error' required 
+                                        onChange={(e) => {setDetail({...Detail, [e.target.name] : e.target.value});}}>
+                                            {Genders.map((name) => (
+                                                <MenuItem key={name} value={name} >{name}</MenuItem>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
+
+                                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                        <DatePicker label="Last Donation Date" inputFormat="dd/MM/yyyy" value={Detail.LDD} openTo="year" views={["year", "month", "day"]}
+                                            onChange={(newDate) => {
+                                                setDetail({...Detail, LDD:newDate});
+                                            }}
+                                            renderInput={(params) => (
+                                                <TextField {...params} style={{gridArea:'LDD'}} color="error" required />
+                                            )}
+                                        />
+                                    </LocalizationProvider>
+
+                                    <TextField id="username" label="Email Address" name="username" value={Credential.username} style={{gridArea:'Email'}} autoComplete="email" color='error' fullWidth required 
+                                        onChange={(e) => {e.persist(); setCredential({...Credential, [e.target.name] : e.target.value});}} />
+
+                                    <TextField id="address" label="Address Line 1" name="line1" value={Address.lin1} style={{gridArea:'Address'}} autoComplete="address" color='error' fullWidth required 
+                                        onChange={(e) => {e.persist(); setAddress({...Address, [e.target.name] : e.target.value});}} />
+
+                                    {/* <TextField id="landmark" label="Landmark/Village" name="landmark" style={{gridArea:'Landmark'}} autoComplete="landmark" color='error' onChange={(e) => handleChange(e)} fullWidth required /> */}
+                                    
+                                    <TextField id="city" label="City" name="city" value={Address.city} style={{gridArea:'City'}} autoComplete="city" color='error' fullWidth required 
+                                        onChange={(e) => {e.persist(); setAddress({...Address, [e.target.name] : e.target.value});}} />
+
+                                    <TextField id="state" label="State" name="state" value={Address.state} style={{gridArea:'State'}} autoComplete="state" color='error' fullWidth required 
+                                        onChange={(e) => {e.persist(); setAddress({...Address, [e.target.name] : e.target.value});}} />
+
+                                    <TextField id="pin" label="Pin" name="pin" value={Address.pin} style={{gridArea:'Pin'}} autoComplete="pin" color='error' fullWidth required 
+                                        onChange={(e) => {e.persist(); setAddress({...Address, [e.target.name] : e.target.value});}} />
+
+                                    <TextField id="password" type={showPassword ? 'text' : 'password'} label="Password" name="password" value={Credential.password} style={{gridArea:'Pass'}} autoComplete="new-password" color='error' fullWidth required 
+                                        onChange={(e) => {e.persist(); setCredential({...Credential, [e.target.name] : e.target.value});}} 
+                                        InputProps={{
+                                            endAdornment: <InputAdornment position="end">
+                                                    <div style={{cursor:'pointer'}} onClick={handleClickShowPassword}>
+                                                        {showPassword ? <PasswordTwoToneIcon/> : <AbcTwoToneIcon sx={{fontSize:'30px'}}/> }
+                                                    </div>
+                                                </InputAdornment>,
+                                            }}
+                                    />
+                                </div>
                                 <FormControlLabel
                                     control={<Checkbox value="allowExtraEmails" color='error' />}
                                     label="Accept the terms and Conditions." />
+
                                 <Button type="submit" fullWidth variant="contained" sx={{ mt: 2, mb: 2, fontSize:'15px', fontWeight:'bold', backgroundColor:"#c6414c",':hover': {bgcolor: '#c6414c'} }} > 
                                     Sign Up 
                                     {Spinner && (<CircularProgress sx={{ml:2, color:'white'}} size={20}/>)}
                                 </Button>
+
                                 <Grid container justifyContent="flex-end">
                                     <Grid item>
                                         <Link href="/SignIn" variant="body2" color='#c6414c'>

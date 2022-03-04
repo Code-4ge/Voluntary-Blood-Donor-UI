@@ -11,7 +11,7 @@
 }
 
 .register{
-    padding: 100px 150px 50px;
+    padding: 110px 150px 50px;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-evenly;
@@ -27,4 +27,19 @@
 .reg_info p{
     text-align: justify;
     color: gray;
+}
+
+.form_grid{
+    display: grid;
+    grid-template-areas:
+        'FName FName LName LName'
+        'DOB DOB BlGroup BlGroup'
+        'Phone Phone Phone Phone'
+        'Gender Gender LDD LDD'
+        'Email Email Email Email'
+        'Address Address Address Address'
+        'City City State State'
+        'Pin Pin Space Space'
+        'Pass Pass Pass Pass';
+    gap: 15px;
 }
