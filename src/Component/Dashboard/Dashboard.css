@@ -1,0 +1,124 @@
+.dashboard{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: #f8f8f8;
+}
+
+.profile{
+    width: fit-content;
+    height: fit-content;
+    padding: 120px 50px 50px 100px;
+}
+
+.profile h1{
+    font-family: cursive;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.profile .quote{
+    width: 800px;
+    height: 100px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    border-radius: 50px 25px 50px 25px;
+    background-color: #ffa2776b;
+}
+
+.quote span{
+    height: fit-content;
+    margin-top: -40px;
+    padding: 20px;
+    font-size: 30px;
+    font-weight: 600;
+    color: whitesmoke;
+    /* background-color: #ff7839; */
+    background-color: #ffa57b;
+    border-radius: 5px;
+}
+
+.quote p{
+    font-size: 20px;
+}
+
+.services{
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.rec_post, .achive{
+    width: 335px;
+    height: fit-content;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #7a7a7a;
+}
+
+.req_contain{
+    height: 350px;
+    overflow-y: scroll;
+}
+
+.rec_post .request{
+    margin: 5px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 10px;
+    font-size: 16px;
+    color: black;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+.bl_type_req{
+    padding: 5px 10px;
+    border-radius: 15px;
+    color: whitesmoke;
+    background-color: #c6414c;
+}
+
+.request p span{
+    font-size: 13px;
+    color: gray;
+}
+
+.notification{
+    width: 360px;
+    padding: 120px 0 0;
+    background-color: #eeeeee;
+}
+
+.notification h3{
+    margin-bottom: 10px;
+    padding-left: 30px;
+    font-weight: 600;
+    color: gray;
+}
+
+.notification .notice_list{
+    height: 670px;
+    padding: 10px 50px;
+    overflow-y: scroll;
+    background-color: transparent;
+}
+
+.notice_list .list-bg{
+    width: fit-content;
+    background-color:#636363;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.notification .notice_list .list{
+    width: 250px;
+    height: 180px;
+    margin-left: 7px;
+    border-radius: 5px;
+    background-color: white;
+}
