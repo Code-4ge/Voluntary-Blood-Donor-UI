@@ -1,0 +1,82 @@
+.setting_container{
+    padding: 120px 150px 50px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+.setting_sideMenu{
+    width: 250px;
+    height: fit-content;
+    background-color: #707070;
+}
+
+.setting_sideMenu div{
+    height: fit-content;
+    margin-right: 1px;
+    padding: 10px 0;
+    background-color: white;
+}
+
+.setting_sideMenu div h4:nth-of-type(1){
+    margin-top: 0;
+}
+
+
+.setting_sideMenu div h4:nth-of-type(5){
+    margin-bottom: 0;
+}
+
+.setting_sideMenu div h4 a{
+    text-decoration: none;
+    font-weight: 600;
+    color: #2e2e2e;
+}
+
+
+.setting_profile{
+    width: 100%;
+    height: fit-content;
+}
+
+.setting_profile h2{
+    font-weight: 600;
+    margin-top: 0;
+}
+
+.usr_profile,
+.usr_pass,
+.usr_location,
+.usr_status{
+    height: fit-content;
+    padding: 0 50px;
+}
+
+.setting_form_grid{
+    display: grid;
+    grid-template-areas:
+    'FName FName LName LName'
+    'DoB DoB Gender Gender'
+    'BGroup BGroup Space1 Space1'
+    'Phone Phone Phone Phone'
+    'Email Email Email Email'
+    'Btn Space2 Space2 Space2';
+    gap: 15px;
+}
+
+.setting_location_grid{
+    display: grid;
+    grid-template-areas: 
+    'Address Address Space3'
+    'State City Space4'
+    'Pin Space5 Space5';
+    gap: 15px;
+}
+
+.setting_avaliable_grid{
+    display: grid;
+    grid-template-areas:
+    'Status Status Status Status Status Status Status'
+    'LDD Space6 Space6 Space6 Space6 Space6 Space6';
+    gap: 15px;
+}
