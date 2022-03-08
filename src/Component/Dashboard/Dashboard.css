@@ -43,6 +43,10 @@
     font-size: 20px;
 }
 
+
+
+/* Blood request recivied style */
+
 .services{
     margin-top: 50px;
     display: flex;
@@ -50,7 +54,7 @@
     justify-content: space-between;
 }
 
-.rec_post, .achive{
+.rec_post, .achive, .recipient{
     width: 335px;
     height: fit-content;
     padding: 15px;
@@ -87,6 +91,23 @@
     font-size: 13px;
     color: gray;
 }
+
+
+
+/* Blood request send status if recipent */
+
+.recipient{
+    width: 100%;
+    padding-top: 50px !important;
+}
+
+.tableBody_container{
+    background-color: red;
+}
+
+
+
+/* Notification div style */
 
 .notification{
     width: 360px;
