@@ -1,44 +1,39 @@
-.Request {
-    height: fit-content;
-    background-color: #f3f3f3;
-    padding: 70px;
-  }
-  
-  .Request section {
-    text-align: center;
-  }
-  
-  .Request h2 {
-    font-weight: bold;
-  }
-  .Request h2 span:nth-child(1) {
-    text-decoration-line: underline !important;
-    text-decoration-color: #ea0000;
-    text-decoration-thickness: 3px;
-    text-underline-offset: 8px;
-  }
-  .Request h2 span:nth-child(2) {
-    color: #ea0000;
-  }
-  
-  .ReqData form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 50px 10%;
-  }
-  
-  .ReqData input {
-    width: 300px;
-    margin: 20px;
-    padding: 0 4px;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid black;
-  }
-  
-  ::placeholder {
-    color: #1d1d1d;
-    opacity: 1;
-  }
-  
+.search_donor_container {
+  height: fit-content;
+  background-color: #fafafa;
+  padding: 100px 100px 70px;
+  background-position: bottom;
+  background-position-x: right;
+  background-size: 1400px 400px;
+  background-repeat: no-repeat;
+}
+
+.search_donor_container section {
+  text-align: center;
+}
+
+.search_donor_container h1 {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 50px;
+}
+.search_donor_container h1 span:nth-child(1) {
+  text-decoration-line: underline !important;
+  text-decoration-color: #ea0000;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 8px;
+}
+.search_donor_container h1 span:nth-child(2) {
+  color: #ea0000;
+}
+
+.search_donor_input{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.search_donor_result{
+  margin: 50px;
+}
+
