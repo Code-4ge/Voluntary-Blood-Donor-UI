@@ -6,6 +6,7 @@ import SignUp from './Component/SignIn_Up/SignUp';
 import Loading from './Component/Loading';
 import VerifyAccount from './Component/VerifyAccount';
 import Dashboard from './Component/Dashboard';
+import Settings from './Component/Settings';
 import AuthenticatedRoute from './Service/AuthenticatedRoute';
 import About from './Component/About';
 import Footer from './Component/Footer';
@@ -28,6 +29,7 @@ function App() {
 			<Route path='/loading' exact component={Loading}/>
 			<Route path='/registration/verification/:token' exact component={VerifyAccount}/>
 			<AuthenticatedRoute path='/dashboard' exact component={Dashboard} />
+			<AuthenticatedRoute path='/dashboard/settings' exact component={Settings} />
 			<Route path='/About' exact component={About}/>
         </Switch>
       </Router>
