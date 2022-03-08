@@ -51,7 +51,7 @@ export default function Navbar() {
                         <Link className='item' href="/About" variant="body2">
                           About Us
                         </Link>
-                        <Link className='item' href="/setting" variant="body2">
+                        <Link className='item' href="/dashboard/settings" variant="body2">
                           Settings
                         </Link>
                       </section>

@@ -40,6 +40,7 @@ export default function SignIn() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(Users);
         setSpinner(true);
         AuthenticationService.executeBasicAuthenticationService(Users.email, Users.password)
             .then((res) => {
