@@ -30,7 +30,7 @@ nav img{
     background-color: transparent;
 }
 
-.sidenav button:nth-of-type(2){
+#logout, .sidenav button:nth-of-type(2){
     color: whitesmoke;
     border: none;
     background-color: #ea0000;
@@ -58,7 +58,7 @@ nav img{
     font-size: 15px;
     font-weight: 600;
     text-decoration: none;
-    color: #636363;
+    color: #525252;
 }
 
 .auth_menu .item:hover{

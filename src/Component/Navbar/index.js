@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types';
 import Link from "@mui/material/Link";
 import Slide from '@mui/material/Slide';
@@ -25,6 +25,17 @@ function HideOnScroll(props) {
 
 export default function Navbar() {
 
+  const [LoggedIn, setLoggedIn] = useState(false)
+
+  useEffect(() => {
+    (async () => {
+      const loggedIn = await AuthenticationService.isUserLoggedIn();
+      if (loggedIn) setLoggedIn(true);
+    })();
+  }, [LoggedIn]);
+  
+
+
     return (
         <HideOnScroll>
             <AppBar sx={{backgroundColor:'white'}}>
@@ -33,12 +44,18 @@ export default function Navbar() {
                         <img src={process.env.PUBLIC_URL + '/assets/logo.png'} alt="logo" />
                     </a>
                     <div id="mySidenav" className='sidenav'>
-                        <button>New Donor</button>
-                        <button>Login</button>
+                      {LoggedIn ? (
+                        <button id='logout' onClick={(e) => {window.open('/signout', '_self');}}>SignOut</button>
+                      ) : (
+                        <>
+                          <button onClick={(e) => {window.open('/signup', '_self');}}>New Donor</button>
+                          <button onClick={(e) => {window.open('/signin', '_self');}}>Login</button>
+                        </>
+                      )}
                     </div>
                 </nav>
                 <div>
-                  {AuthenticationService.isUserLoggedIn() ? (
+                  {LoggedIn && (
                     <div className='auth_menu'>
                       <hr style={{height:'1px', margin:'0 150px', border:'none', backgroundColor: '#cccccc' }} />
                       <section>
@@ -56,8 +73,6 @@ export default function Navbar() {
                         </Link>
                       </section>
                     </div>
-                  ) : (
-                    <></>
                   )}
                 </div>
             </AppBar>
