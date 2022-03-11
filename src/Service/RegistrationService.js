@@ -1,11 +1,10 @@
 import axios from 'axios';
 
-const REGISTRATION_API_BASE_URL = "http://localhost:8080/api/signup";
+const REGISTRATION_API_BASE_URL = "http://localhost:8080/blood-donor/register";
 
 class RegistrationService{
 
     registerDonor(user_details){
-        console.log(user_details);
         return axios.post(REGISTRATION_API_BASE_URL, user_details);
     }
 

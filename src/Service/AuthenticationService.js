@@ -1,39 +1,51 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const API_URL = 'http://localhost:8080'
+const API_URL = 'http://localhost:8080';
 
-export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser';
+export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'SESSIONauth';
 
 
 class AuthenticationService{
 
-    executeBasicAuthenticationService(username, password){
-        return axios.get(`${API_URL}/login`,
-            { 
-                headers: { Authorization: this.createBasicAuthToken(username, password) } 
-            });
+
+
+    executeJWTAuthenticationService(Users){
+        return axios.post(`${API_URL}/user/signin`, Users );
     }
 
-    createBasicAuthToken(username, password){
-        return 'Basic ' + window.btoa(username + ":" + password)
+    authHeader(){
+        const JwtToken = localStorage.getItem('SESSIONauth');
+        if(JwtToken)
+            return {Authorization: this.createJWTAuthToken(JwtToken)};
+        else
+            return {};
     }
 
-    isUserLoggedIn(){
-        let user = sessionStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
-        if (user === null) 
-            return false;
+    getUserRoles(){
+        
+    }
+
+    createJWTAuthToken(token){
+        return 'Bearer ' + token;
+    }
+
+    registerSuccessfulLogin(token) {
+        localStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, token)
+        this.setupAxiosInterceptors(this.createJWTAuthToken(token))
         return true;
     }
-
-    registerSuccessfulLogin(username, password) {
-        sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, username)
-        this.setupAxiosInterceptors(this.createBasicAuthToken(username, password))
+    
+    isUserLoggedIn(){
+        let user = localStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
+        if (user === null) 
+        return false;
+        return true;
     }
     
     logout() {
-        sessionStorage.removeItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
+        localStorage.removeItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
     }
-
+    
     setupAxiosInterceptors(token) {
         axios.interceptors.request.use(
             (config) => {
