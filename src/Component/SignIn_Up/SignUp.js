@@ -29,6 +29,7 @@ import Swal from "sweetalert2";
 import State_City_Data from '../../Service/Data';
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
+import validator from 'validator';
 import "./SignIn_Up.css";
 
 
@@ -91,48 +92,63 @@ export default function SignUp() {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSpinner(true);
-        const user_details = {
-            appUser: {
-                person: {
-                    firstName: Detail.firstName,
-                    lastName: Detail.lastName,
-                    gender: Detail.gender,
-                    dateOfBirth: Detail.dateOfBirth.getFullYear()+"-"+(Detail.dateOfBirth.getMonth()+1)+"-"+Detail.dateOfBirth.getDate(),
-                },
-                username: Detail.username,
-                password: Detail.password,
-            },
-            bloodGroup: Detail.bloodGroup,
-            address: Address,
-            whatsAppNumber: Detail.whatsAppNumber,
-            lastDonationDate: Detail.lastDonationDate==null ? (null) : (Detail.lastDonationDate.getFullYear()+"-"+(Detail.lastDonationDate.getMonth()+1)+"-"+Detail.lastDonationDate.getDate()),
-        }
 
-        // TODO check validation
-        RegistrationService.registerDonor(user_details).then((response)=>{
-            console.log(response)
-            setSpinner(false);
-            Swal.fire({
-                imageUrl:`${process.env.PUBLIC_URL}/assets/email.png`,
-                imageHeight: '200',
-                imageWidth: '250',
-                title: "You're almost there!",
-                html: "<i>"+Detail.username+"</i> <br> Head over to your inbox to confirm your email and finish your account creation!",
-                confirmButtonText: 'OK',
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-                focusConfirm: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.replace('/');
-                }
-            });
-        }).catch((error) =>{
-            setErrorMsg("error.response.data.message");
+        if(!validator.isEmail(Detail.username)){
             setSpinner(false);
             setAlert(true);
-        });
+            setErrorMsg("Enter valid Email address");
+        }
+        else if(!validator.isStrongPassword(Detail.password, { minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1 })){
+            setSpinner(false);
+            setAlert(true);
+            setErrorMsg("Password must be 8 character and contain atleast one Lowercase, Uppercase, Numbers & Symbols");
+        }
+        else{
+            const user_details = {
+                appUser: {
+                    person: {
+                        firstName: Detail.firstName,
+                        lastName: Detail.lastName,
+                        gender: Detail.gender,
+                        dateOfBirth: Detail.dateOfBirth,
+                    },
+                    username: Detail.username,
+                    password: Detail.password,
+                },
+                bloodGroup: Detail.bloodGroup,
+                address: Address,
+                whatsAppNumber: Detail.whatsAppNumber,
+                lastDonationDate: Detail.lastDonationDate,
+            }
 
+            RegistrationService.registerDonor(user_details).then((response)=>{
+                console.log(response)
+                setSpinner(false);
+                Swal.fire({
+                    imageUrl:`${process.env.PUBLIC_URL}/assets/email.png`,
+                    imageHeight: '200',
+                    imageWidth: '250',
+                    title: "You're almost there!",
+                    html: "<i>"+Detail.username+"</i> <br> Head over to your inbox to confirm your email and finish your account creation!",
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    focusConfirm: true,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.replace('/');
+                    }
+                });
+            }).catch((error) =>{
+                setSpinner(false);
+                setAlert(true);
+                console.log(error);
+                if(error.response && error.response.data && error.response.data.message)
+                    setErrorMsg("error.response.data.message");
+                else
+                    setErrorMsg("Failed to Register, Try after some time...");
+            });
+        }
     };
 
     const handleCloseAlert = (event, reason) => {
@@ -152,7 +168,7 @@ export default function SignUp() {
         <>
             <div className="register">
                 <div className="form">
-                    <Snackbar open={Alert} onClick={handleCloseAlert} anchorOrigin={{vertical:'top', horizontal:'right'}} sx={{mt:6}}>
+                    <Snackbar open={Alert} autoHideDuration={10000} onClick={handleCloseAlert} onClose={handleCloseAlert} anchorOrigin={{vertical:'top', horizontal:'right'}} sx={{mt:6}}>
                         <MuiAlert elevation={6} variant="filled" severity="error" sx={{ width: '100%' }}>
                             {errorMsg}
                         </MuiAlert>
@@ -247,16 +263,12 @@ export default function SignUp() {
                                         </Select>
                                     </FormControl>
 
-                                    {/* <TextField id="landmark" label="Landmark/Village" name="landmark" style={{gridArea:'Landmark'}} autoComplete="landmark" color='error' onChange={(e) => handleChange(e)} fullWidth required /> */}
-
-                                    {/* <TextField id="city" label="City" name="city" value={Address.city} style={{gridArea:'City'}} autoComplete="city" color='error' fullWidth required 
-                                        onChange={(e) => {e.persist(); setAddress({...Address, [e.target.name] : e.target.value});}} /> */}
-
-                                    {/* <TextField id="state" label="State" name="state" value={Address.state} style={{gridArea:'State'}} autoComplete="state" color='error' fullWidth required 
-                                        onChange={(e) => {e.persist(); setAddress({...Address, [e.target.name] : e.target.value});}} /> */}
-
                                     <TextField id="pincode" label="Pincode" name="pincode" value={Address.pincode} style={{gridArea:'Pin'}} autoComplete="pincode" color='error' fullWidth required 
-                                        onChange={(e) => {e.persist(); setAddress({...Address, [e.target.name] : e.target.value});}} />
+                                        onChange={(e) => {setAddress({...Address, [e.target.name] : e.target.value});}} 
+                                        InputProps={{
+                                            inputComponent: TextMaskCustom
+                                        }}
+                                    />
 
                                     <TextField id="password" type={showPassword ? 'text' : 'password'} label="Password" name="password" value={Detail.password} style={{gridArea:'Pass'}} autoComplete="new-password" color='error' fullWidth required 
                                         onChange={(e) => {e.persist(); setDetail({...Detail, [e.target.name] : e.target.value});}} 
@@ -270,7 +282,7 @@ export default function SignUp() {
                                     />
                                 </div>
                                 <FormControlLabel
-                                    control={<Checkbox value="allowExtraEmails" color='error' />}
+                                    control={<Checkbox value="allowExtraEmails" color='error' required/>}
                                     label="Accept the terms and Conditions." />
 
                                 <Button type="submit" fullWidth variant="contained" sx={{ mt: 2, mb: 2, fontSize:'15px', fontWeight:'bold', backgroundColor:"#c6414c",':hover': {bgcolor: '#c6414c'} }} > 

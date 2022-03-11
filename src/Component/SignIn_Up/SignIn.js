@@ -16,20 +16,19 @@ import CircularProgress from '@mui/material/CircularProgress';
 import PasswordTwoToneIcon from '@mui/icons-material/PasswordTwoTone';
 import AbcTwoToneIcon from '@mui/icons-material/AbcTwoTone';
 import InputAdornment from '@mui/material/InputAdornment';
-import { useHistory } from "react-router-dom";
+import validator from 'validator';
 
 import "./SignIn_Up.css"
 
 
 export default function SignIn() {
 
-    const history = useHistory();
     const [errorMsg, seterrorMsg] = useState()
     const [showPassword, setShowPassword] = useState(false)
     const [Alert, setAlert] = useState(false);
     const [Spinner, setSpinner] = useState(false);
     const [Users, setUsers] = useState({
-        email:"",
+        username:"",
         password:""
     });
 
@@ -40,21 +39,34 @@ export default function SignIn() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(Users);
         setSpinner(true);
-        AuthenticationService.executeBasicAuthenticationService(Users.email, Users.password)
-            .then((res) => {
-                console.log(res);
-                setSpinner(false);
-                AuthenticationService.registerSuccessfulLogin(Users.email, Users.password)
-                console.log("looged In, Now redirect to dashboard");
-                history.push('/dashboard');
-            }).catch((error) => {
-                console.log(error)
-                setAlert(true);
-                seterrorMsg('error in login');
-                setSpinner(false);
-            })
+        if(!validator.isEmail(Users.username)){
+            setSpinner(false);
+            setAlert(true);
+            seterrorMsg("Enter valid Email address");
+        }
+        else if(!validator.isStrongPassword(Users.password, { minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1 })){
+            setSpinner(false);
+            setAlert(true);
+            seterrorMsg("Password must be 8 character and contain atleast one Lowercase, Uppercase, Numbers & Symbols");
+        }
+        else{
+            AuthenticationService.executeJWTAuthenticationService(Users)
+                .then((response) => {
+                    if(AuthenticationService.registerSuccessfulLogin(response.data))
+                    {
+                        setSpinner(false);
+                        window.open('/dashboard', '_self')
+                        // history.replace('/dashboard');
+                        // window.location.reload();
+                    }
+                }).catch((error) => {
+                    console.log(error)
+                    setAlert(true);
+                    seterrorMsg('error in login');
+                    setSpinner(false);
+                })
+            }
       };
 
       const handleCloseAlert = (event, reason) => {
@@ -73,7 +85,7 @@ export default function SignIn() {
         <>
             <div id="bg-container">
                 <div className="login-container">
-                    <Snackbar open={Alert} onClick={handleCloseAlert} anchorOrigin={{vertical:'top', horizontal:'right'}} sx={{mt:6}}>
+                    <Snackbar open={Alert} autoHideDuration={10000} onClick={handleCloseAlert} onClose={handleCloseAlert} anchorOrigin={{vertical:'top', horizontal:'right'}} sx={{mt:6}}>
                         <MuiAlert elevation={6} variant="filled" severity="error" sx={{ width: '100%' }}>
                             {errorMsg}
                         </MuiAlert>
@@ -87,7 +99,7 @@ export default function SignIn() {
                                 SIGN IN
                             </Typography>
                             <Box component="form" onSubmit={handleSubmit} Validate sx={{ mt: 2, }}>
-                                <TextField margin="normal" required fullWidth id="email" label="Email Address" name="email" color="error" onChange={handleChange} autoComplete="email" autoFocus />
+                                <TextField margin="normal" required fullWidth id="username" label="Email Address" name="username" color="error" onChange={handleChange} autoComplete="username" autoFocus />
                                 <TextField 
                                     margin="normal" 
                                     required 
