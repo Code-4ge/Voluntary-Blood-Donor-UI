@@ -23,14 +23,14 @@ function App() {
 				<Header />
 				<Info />
 			</Route>
-			<Route path='/Reqblood' exact component={ReqBlood}/>
-			<Route path='/SignIn' exact component={SignIn}/>
-			<Route path='/SignUp' exact component={SignUp}/>
+			<Route path='/reqblood' exact component={ReqBlood}/>
+			<Route path='/signin' exact component={SignIn}/>
+			<Route path='/signup' exact component={SignUp}/>
 			<Route path='/loading' exact component={Loading}/>
 			<Route path='/registration/verification/:token' exact component={VerifyAccount}/>
 			<AuthenticatedRoute path='/dashboard' exact component={Dashboard} />
 			<AuthenticatedRoute path='/dashboard/settings' exact component={Settings} />
-			<Route path='/About' exact component={About}/>
+			<Route path='/about' exact component={About}/>
         </Switch>
       </Router>
 	  <Footer/>
