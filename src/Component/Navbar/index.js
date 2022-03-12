@@ -45,7 +45,7 @@ export default function Navbar() {
                     </a>
                     <div id="mySidenav" className='sidenav'>
                       {LoggedIn ? (
-                        <button id='logout' onClick={(e) => {window.open('/signout', '_self');}}>SignOut</button>
+                        <button id='logout' onClick={(e) => {AuthenticationService.logout(); window.location.reload();}}>SignOut</button>
                       ) : (
                         <>
                           <button onClick={(e) => {window.open('/signup', '_self');}}>New Donor</button>
