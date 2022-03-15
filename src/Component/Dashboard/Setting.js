@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from "@mui/material/TextField";
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
@@ -6,18 +6,32 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import State_City_Data from '../../Service/Data';
+import userService from '../../Service/UserService';
 import Switch from '@mui/material/Switch';
 import Box from '@mui/material/Box';
 import './Setting.css';
 
-export default function Settings() {
+export default function Setting() {
     
-
+    const [isLoading, setisLoading] = useState(true)
     const [checkedStatus, setCheckedStatus] = useState(true);
     const { data } = State_City_Data;
     const stateList = Object.keys(data);
     const [cityList, setCityList] = useState([]);
 
+    
+    // useEffect(() => {
+    //     userService.getUsersDetails()
+    //     .then(res => {
+    //         setisLoading(false);
+    //         console.log(res);
+    //     })
+    //     .catch(err => {
+    //         console.log(err);
+    //     })
+    // })
+    
+    
     const handleChange = (event) => {
         console.log(event.target.checked);
         setCheckedStatus(event.target.checked);
