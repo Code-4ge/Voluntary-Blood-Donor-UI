@@ -18,8 +18,8 @@ export default function Footer() {
                 <section>
                     <a href="#">Privacy & Policies</a>
                     <a href="#">Terms & Conditions</a>
-                    <a href="#">About Us</a>
-                    <a href="#">Contact Us</a>
+                    <a href="/about">About Us</a>
+                    <a href="/#contact">Contact Us</a>
                 </section>
             </div>
         </div>

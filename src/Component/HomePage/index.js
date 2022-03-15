@@ -105,7 +105,7 @@ export const Info = () => {
 				</div>
 			</div>
 			<Faq />
-			<div>{Contact()}</div>
+			<div id='contact'>{Contact()}</div>
 		</>
 	);
 };
