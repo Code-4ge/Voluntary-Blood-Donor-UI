@@ -4,16 +4,18 @@ import CircularProgress from '@mui/material/CircularProgress';
 import TextField from "@mui/material/TextField";
 import Box from '@mui/material/Box';
 import userService from '../../Service/UserService';
-import Button from '@mui/material/Button';
+import AuthenticationService from '../../Service/AuthenticationService';
+import Button from '@mui/material/Button';    
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
+import Swal from "sweetalert2";
 import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
+import Select from '@mui/material/Select';   
 import State_City_Data from '../../Service/Data';
 import React, { useState, useEffect, useRef } from "react";
 import Pagination from '@mui/material/Pagination';
 import { DataGrid } from "@mui/x-data-grid";
-import "./ReqBlood.css";
+import "./RequestBlood.css";
 
 
 
@@ -42,10 +44,10 @@ TextMaskCustom.propTypes = {
 
 
 const columns = [
-	{field: "user_id", hide: true},
-	{ field: "id", headerName: "Sr. No.", type:'number', align:'center', sortable: false, disableColumnMenu: true, width: 70,
+	{field: "id", hide: true},
+	{ field: "srNo", headerName: "Sr. No.", type:'number', align:'center', sortable: false, disableColumnMenu: true, width: 70,
 	  valueGetter: (params) => {
-		  return params.api.getRowIndex(params.row.user_id)+1;
+		  return params.api.getRowIndex(params.row.id)+1;
 	  },
 	},
 	{ field: "fullName", headerName: "Full name", sortable: false, width: 200, disableColumnMenu: true,
@@ -57,18 +59,7 @@ const columns = [
 	{ field: "age", headerName: "Age", sortable: false, disableColumnMenu: true, width: 70},
 	{ field: "streetAddress", headerName: "Address", sortable: false, disableColumnMenu: true, flex: 1, minwidth: 300 },
 ];
-  
-//   const rows = [
-// 	{ id: 1, userID: "Sn11", lastName: "Snow", firstName: "Jon", age: 35, bloodGroup: "A+", gender: "Male", streetAddress:"kalewadi, Pimpri", state:"Maharashtra", city:"Pune"},
-// 	{ id: 2, userID: "La12", lastName: "Lannister", firstName: "Cersei", age: 42, bloodGroup: "A+", gender: "Male", streetAddress:"kalewadi, Pimpri", state:"Maharashtra", city:"Pune"},
-// 	{ id: 3, userID: "La13", lastName: "Lannister", firstName: "Jaime", age: 45, bloodGroup: "A+", gender: "Male", streetAddress:"kalewadi, Pimpri", state:"Maharashtra", city:"Pune"},
-// 	{ id: 4, userID: "St14", lastName: "Stark", firstName: "Arya", age: 16, bloodGroup: "A+", gender: "Male", streetAddress:"kalewadi, Pimpri", state:"Maharashtra", city:"Pune"},
-// 	{ id: 5, userID: "Ta15", lastName: "Targaryen", firstName: "Daenerys", age: null, bloodGroup: "A+", gender: "Male", streetAddress:"kalewadi, Pimpri", state:"Maharashtra", city:"Pune"},
-// 	{ id: 6, userID: "Me16", lastName: "Melisandre", firstName: null, age: 150, bloodGroup: "A+", gender: "Male", streetAddress:"kalewadi, Pimpri", state:"Maharashtra", city:"Pune"},
-// 	{ id: 7, userID: "Cl17", lastName: "Clifford", firstName: "Ferrara", age: 44, bloodGroup: "A+", gender: "Male", streetAddress:"kalewadi, Pimpri", state:"Maharashtra", city:"Pune"},
-// 	{ id: 8, userID: "Fr18", lastName: "Frances", firstName: "Rossini", age: 36, bloodGroup: "A+", gender: "Male", streetAddress:"kalewadi, Pimpri", state:"Maharashtra", city:"Pune"},
-// 	{ id: 9, userID: "Ro19", lastName: "Roxie", firstName: "Harvey", age: 65, bloodGroup: "A+", gender: "Male", streetAddress:"kalewadi, Pimpri", state:"Maharashtra", city:"Pune"}
-//   ];
+
 
 
 function CustomNoRowsOverlay() {
@@ -122,17 +113,17 @@ function CustomNoRowsOverlay() {
 			</g>
 		  </g>
 		</svg>
-		<Box>No Rows</Box>
+		<Box>No Donors</Box>
 	  </div>
 	);
 }
   
 
 
-export default function ReqBlood() {
+export default function SearchBlood() {
 
-	const [Spinner, setSpinner] = useState(false);
-
+	const [seachSpinner, setseachSpinner] = useState(false);
+	const [requestSpinner, setRequestSpinner] = useState(false);
 	const [pagination, setPagination] = useState({
 		totalRows: 0,
 		Loading: false,
@@ -172,11 +163,11 @@ export default function ReqBlood() {
 
 	const handleSearchSubmit = (e) => {
 		e.preventDefault();
-        setSpinner(true);
+        setseachSpinner(true);
 		setPagination({...pagination, Loading: true});
 		userService.findDonor(searchFor, 0)
 		.then(response => {
-			setSpinner(false);
+			setseachSpinner(false);
 			setFoundDonors(response.data.donors);
 			setPagination({
 				...pagination,
@@ -186,29 +177,71 @@ export default function ReqBlood() {
 			});
 		})
 		.catch(error => {
-			setSpinner(false);
+			setseachSpinner(false);
+			setPagination({...pagination, Loading: false});
 			console.log("error => " + error);
 		})
 	}
 
 
+	const handleRequestSubmit = () => {
+		if(selectedRows.length !== 0)
+		{
+			setRequestSpinner(true);
+			console.log('request clicked');
+			console.log(selectedRows);
+			userService.setRequestDonor(selectedRows);
+			if(AuthenticationService.isUserLoggedIn())
+			{
+				setRequestSpinner(false);
+				console.log('redirect to Request details page');
+			}
+			else{
+				Swal.fire({
+					confirmButtonText: 'Login',
+					showDenyButton: true,
+					denyButtonText: `Register As User`,
+					backdrop: `rgba(0,0,0,0.4)`,
+					allowOutsideClick: false,
+					allowEscapeKey: false,
+					focusConfirm: true,
+				}).then((result) => {
+					setRequestSpinner(true);
+					if (result.isConfirmed) {
+						window.location.replace('/signin');
+					}
+					else if (result.isDenied) {    
+						window.location.replace('/user/signup');
+					}
+				});
+				setRequestSpinner(true);
+			}
+		}
+		else{
+			console.error("To request select donor first");
+		}
+	}
+
 
 	useEffect(() => {
-		prevSelectedRows.current = selectedRows;
-		setPagination({...pagination, Loading: true});
-		setFoundDonors([]);
-		userService.findDonor(searchFor, pagination.page)
-		.then(response => {
-			setFoundDonors(response.data.donors);
-			setPagination({...pagination, Loading: false});
-			setTimeout(() => {
-				setSelectedRows(prevSelectedRows.current);
+		if(searchFor.bloodGroup.length !== 0 && searchFor.city.length !== 0)
+		{
+			prevSelectedRows.current = selectedRows;
+			setPagination({...pagination, Loading: true});
+			setFoundDonors([]);
+			userService.findDonor(searchFor, pagination.page)
+			.then(response => {
+				setFoundDonors(response.data.donors);
+				setPagination({...pagination, Loading: false});
+				setTimeout(() => {
+					setSelectedRows(prevSelectedRows.current);
+				});
+			})
+			.catch(error => {
+				setPagination({...pagination, Loading: false});
+				console.log("page error =>" + error);
 			});
-		})
-		.catch(error => {
-			setPagination({...pagination, Loading: false});
-			console.log("page error =>" + error);
-		});
+		}
 	}, [pagination.page])
 
 
@@ -265,12 +298,12 @@ export default function ReqBlood() {
 					</div>
 					<Button type="submit" variant="contained" sx={{ mt: 2, mb: 2, pl:4, pr:4, fontSize:'15px', fontWeight:'bold', backgroundColor:"#c6414c",':hover': {bgcolor: '#c6414c'} }} > 
                         Search 
-                        {Spinner && (<CircularProgress sx={{ml:2, color:'white'}} size={20}/>)}
+                        {seachSpinner && (<CircularProgress sx={{ml:2, color:'white'}} size={20}/>)}
                     </Button>
 				</Box>
 				<div className="search_donor_result">
 					<DataGrid
-						getRowId={(row) => row.user_id}
+						getRowId={(row) => row.id}
 						columns={columns}
 						rows={foundDonors}
 						page={pagination.page}
@@ -292,9 +325,9 @@ export default function ReqBlood() {
 							NoRowsOverlay: CustomNoRowsOverlay,
 						}}
 					/>
-					<Button variant="contained" onClick={() => {console.log(selectedRows)}} sx={{ mt: 2, mb: 2, pl:4, pr:4, fontSize:'15px', fontWeight:'bold', backgroundColor:"#c6414c",':hover': {bgcolor: '#c6414c'} }} > 
+					<Button variant="contained" onClick={() => handleRequestSubmit()} sx={{ mt: 2, mb: 2, pl:4, pr:4, fontSize:'15px', fontWeight:'bold', backgroundColor:"#c6414c",':hover': {bgcolor: '#c6414c'} }} > 
                         Request 
-                        {/* {Spinner && (<CircularProgress sx={{ml:2, color:'white'}} size={20}/>)} */}
+                        {requestSpinner && (<CircularProgress sx={{ml:2, color:'white'}} size={20}/>)}
                     </Button>
 				</div>
 			</section>

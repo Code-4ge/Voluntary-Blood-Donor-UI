@@ -43,3 +43,13 @@
         'Pass Pass Pass Pass';
     gap: 15px;
 }
+
+.user_form_grid{
+    display: grid;
+    grid-template-areas:
+        'FName FName LName LName'
+        'DOB DOB Gender Gender'
+        'Email Email Email Email'
+        'Pass Pass Pass Pass';
+    gap: 15px;
+}

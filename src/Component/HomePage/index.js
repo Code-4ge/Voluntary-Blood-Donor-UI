@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useState, useRef } from 'react';
 import Faq from '../Faq';
-import { PostReqList } from '../PostReq';
+import { ShowRequestPost } from '../PostBloodRequest/ShowRequestPost';
 import './Home.css'
 
 export const Header = () => {
@@ -34,7 +34,7 @@ export const Header = () => {
 					<span>"Your greatness is <br/>not what you have. <br />it's what you give"<br/></span>
 				</p>
 				<section className='serviceBtn'>
-					<button onClick={(e) => {window.open('/reqblood', '_self');}}>Find A Blood Donor &nbsp; &#10095;</button><br/>
+					<button onClick={(e) => {window.open('/search-for-blood', '_self');}}>Find A Blood Donor &nbsp; &#10095;</button><br/>
 					<button>Post Blood Request &nbsp; &#10095;</button><br/>
 					{/* <button>Service Organisation (Comming Soon)</button><br/> */}
 				</section>
@@ -101,7 +101,7 @@ export const Info = () => {
 					odit. */}
 				</div>
 				<div>
-					<PostReqList />
+					<ShowRequestPost />
 				</div>
 			</div>
 			<Faq />

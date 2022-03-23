@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import ReqBlood from "./Component/ReqBlood";
+import SearchBlood from "./Component/RequestBlood/SearchBlood";
 import { Header, Info } from "./Component/HomePage";
 import SignIn from './Component/SignIn_Up/SignIn';
 import SignUp from './Component/SignIn_Up/SignUp';
+import UserSignUp from './Component/SignIn_Up/UserSignUp';
 import Loading from './Component/Loading';
 import VerifyAccount from './Component/VerifyAccount';
 import Dashboard from './Component/Dashboard';
@@ -23,9 +24,10 @@ function App() {
 				<Header />
 				<Info />
 			</Route>
-			<Route path='/reqblood' exact component={ReqBlood}/>
+			<Route path='/search-for-blood' exact component={SearchBlood}/>
 			<Route path='/signin' exact component={SignIn}/>
-			<Route path='/signup' exact component={SignUp}/>
+			<Route path='/donors/signup' exact component={SignUp}/>
+			<Route path='/user/signup' exact component={UserSignUp}/>
 			<Route path='/loading' exact component={Loading}/>
 			<Route path='/registration/verification/:token' exact component={VerifyAccount}/>
 			<AuthenticatedRoute path='/dashboard' exact component={Dashboard} />

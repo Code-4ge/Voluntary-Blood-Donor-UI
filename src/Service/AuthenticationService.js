@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080';
+const API_URL = 'http://localhost:8080/api';
 
 export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'SESSIONauth';
 
@@ -10,7 +10,7 @@ class AuthenticationService{
 
 
     executeJWTAuthenticationService(Users){
-        return axios.post(`${API_URL}/user/signin`, Users );
+        return axios.post(`${API_URL}/appUsers/signin`, Users );
     }
 
     authHeader(){
@@ -38,7 +38,7 @@ class AuthenticationService{
     isUserLoggedIn(){
         let user = localStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
         if (user === null) 
-        return false;
+            return false;
         return true;
     }
     

@@ -1,6 +1,6 @@
 import './PostReq.css'
 
-export const PostReqList = () => {
+export const ShowRequestPost = () => {
     return (
         <>
             <div className='curPost'>

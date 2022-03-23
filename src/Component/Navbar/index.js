@@ -48,7 +48,7 @@ export default function Navbar() {
                         <button id='logout' onClick={(e) => {AuthenticationService.logout(); window.location.reload();}}>SignOut</button>
                       ) : (
                         <>
-                          <button onClick={(e) => {window.open('/signup', '_self');}}>New Donor</button>
+                          <button onClick={(e) => {window.open('donors/signup', '_self');}}>New Donor</button>
                           <button onClick={(e) => {window.open('/signin', '_self');}}>Login</button>
                         </>
                       )}

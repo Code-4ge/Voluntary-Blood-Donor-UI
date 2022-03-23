@@ -14,78 +14,39 @@ import Grid from "@mui/material/Grid";
 import HowToRegTwoToneIcon from '@mui/icons-material/HowToRegTwoTone';
 import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
-import { IMaskInput } from "react-imask";
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Link from "@mui/material/Link";
 import MuiAlert from '@mui/material/Alert';
 import MenuItem from '@mui/material/MenuItem';
 import PasswordTwoToneIcon from '@mui/icons-material/PasswordTwoTone';
-import PropTypes from "prop-types";
 import React from "react";
 import RegistrationService from "../../Service/RegistrationService";
 import Select from '@mui/material/Select';
 import { Snackbar } from "@mui/material";
 import Swal from "sweetalert2";
-import State_City_Data from '../../Service/Data';
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import validator from 'validator';
 import "./SignIn_Up.css";
 
-
-
-const TextMaskCustom = React.forwardRef(function TextMaskCustom(props, ref) {
-    const { onChange, ...other } = props;
-    return (
-      <IMaskInput
-        {...other}
-        mask="0000000000"
-        definitions={{
-          "#": /[1-9]/
-        }}
-        inputRef={ref}
-        onAccept={(value) => onChange({ target: { name: props.name, value } })}
-        overwrite
-      />
-    );
-});
-  
-TextMaskCustom.propTypes = {
-    name: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired
-};
-
-
-
   
 
-export default function SignUp() {
+export default function UserSignUp() {
 
-	const { data } = State_City_Data;
-    const stateList = Object.keys(data);
-    const [cityList, setCityList] = useState([]);
-    const [errorMsg, setErrorMsg] = useState()
     const [Detail, setDetail] = useState({
         firstName:"",
         lastName:"",
         dateOfBirth:null,
-        bloodGroup:"",
-        whatsAppNumber:"",
-        lastDonationDate:null,
         gender:"",
         username:"",
         password:"",
     });
-    const [Address, setAddress] = useState({
-        streetAddress:"",
-        city:"",
-        state:"",
-        pincode:"",
-    });
     const [showPassword, setShowPassword] = useState(false);
     const [Spinner, setSpinner] = useState(false);
+
+    const [errorMsg, setErrorMsg] = useState()
     const [Alert, setAlert] = useState(false);
-    const BlTypes = [ 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+
     const Genders = [ 'Male', 'Female', 'Unisex'];
 
 
@@ -105,27 +66,16 @@ export default function SignUp() {
         }
         else{
             const user_details = {
-                appUserDTO: {
                     firstName: Detail.firstName,
                     lastName: Detail.lastName,
                     gender: Detail.gender,
                     dateOfBirth: Detail.dateOfBirth,
                     username: Detail.username,
                     password: Detail.password,
-                },
-                donorDTO:{
-                    bloodGroup: Detail.bloodGroup,
-                    streetAddress: Address.streetAddress,
-                    state: Address.state,
-                    city: Address.city,
-                    pincode: Address.pincode,
-                    whatsapp: Detail.whatsAppNumber,
-                    lastDonationDate: Detail.lastDonationDate,
-                }
             }
 
-            RegistrationService.registerDonor(user_details).then((response)=>{
-                console.log(response)
+            RegistrationService.registerUser(user_details).then((response)=>{
+                console.log(response);
                 setSpinner(false);
                 Swal.fire({
                     imageUrl:`${process.env.PUBLIC_URL}/assets/email.png`,
@@ -147,7 +97,7 @@ export default function SignUp() {
                 setAlert(true);
                 console.log(error);
                 if(error.response && error.response.data && error.response.data.message)
-                    setErrorMsg("error.response.data.message");
+                    setErrorMsg(error.response.data.message);
                 else
                     setErrorMsg("Failed to Register, Try after some time...");
             });
@@ -179,7 +129,7 @@ export default function SignUp() {
                     <Card sx={{ width:"fit-content", padding:"15px", boxShadow:"0 -5px 5px -5px rgba(0, 0, 0, 0.2), 0 5px 5px -5px rgba(0, 0, 0, 0.2)"}}>
                         <CardContent>
                             <Box component="form" onSubmit={handleSubmit} Validate sx={{ mt: 2, width:'400px'}}>
-                                <div className='form_grid'>
+                                <div className='user_form_grid'>
                                     <TextField id="firstName" label="First Name" name="firstName" value={Detail.firstName} style={{gridArea:'FName'}} autoComplete="given-name" color='error' fullWidth required autoFocus 
                                         onChange={(e) => {e.persist(); setDetail({...Detail, [e.target.name] : e.target.value});}} /> 
 
@@ -197,23 +147,6 @@ export default function SignUp() {
                                         />
                                     </LocalizationProvider>
 
-                                    <FormControl style={{gridArea:'BlGroup'}} fullWidth>
-                                        <InputLabel id="Bl-group-label" color='error' required>Blood Group</InputLabel>
-                                        <Select id="Blood-group" labelId="Bl-group-label" name="bloodGroup" label="Blood Group*" value={Detail.bloodGroup} color='error' required 
-                                            onChange={(e) => {setDetail({...Detail, [e.target.name] : e.target.value});}}>
-                                            {BlTypes.map((name) => (
-                                                <MenuItem key={name} value={name} >{name}</MenuItem>
-                                            ))}
-                                        </Select>
-                                    </FormControl>
-
-                                    <TextField id="whatsAppNumber"  label="Whatsapp Number"  name="whatsAppNumber" value={Detail.whatsAppNumber} style={{gridArea:'Phone'}}  color='error'  autoComplete="phone" fullWidth required 
-                                        onChange={(e) => {setDetail({...Detail, [e.target.name] : e.target.value});}} 
-                                        InputProps={{
-                                            inputComponent: TextMaskCustom
-                                        }}
-                                    />
-
                                     <FormControl style={{gridArea:'Gender'}} fullWidth>
                                         <InputLabel id="gender-label" color='error' required>Gender</InputLabel>
                                         <Select id="Gender" labelId="gender-label" name="gender" label="Gender*" value={Detail.gender} color='error' required 
@@ -224,54 +157,8 @@ export default function SignUp() {
                                         </Select>
                                     </FormControl>
 
-                                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                        <DatePicker label="Last Donation Date" inputFormat="dd/MM/yyyy" value={Detail.lastDonationDate} openTo="year" views={["year", "month", "day"]}
-                                            onChange={(newDate) => {
-                                                setDetail({...Detail, lastDonationDate:newDate});
-                                            }}
-                                            renderInput={(params) => (
-                                                <TextField {...params} style={{gridArea:'LDD'}} color="error" />
-                                            )}
-                                        />
-                                    </LocalizationProvider>
-
                                     <TextField id="username" label="Email Address" name="username" value={Detail.username} style={{gridArea:'Email'}} autoComplete="email" color='error' fullWidth required 
                                         onChange={(e) => {e.persist(); setDetail({...Detail, [e.target.name] : e.target.value});}} />
-
-                                    <TextField id="address" label="Street Address" name="streetAddress" value={Address.lin1} style={{gridArea:'Address'}} autoComplete="address" color='error' fullWidth required 
-                                        onChange={(e) => {e.persist(); setAddress({...Address, [e.target.name] : e.target.value});}} />
-
-                                    
-                                    <FormControl style={{gridArea:'State'}} fullWidth>
-                                        <InputLabel id="State-label" color='error' required>State</InputLabel>
-                                        <Select id="state" labelId="State-label" name="state" label="State*" value={Address.state} color='error' required 
-                                            onChange={(e) => {
-                                                setAddress({...Address, [e.target.name] : e.target.value});
-                                                setCityList(data[e.target.value].cities);
-                                            }}>
-                                            {stateList.map((name, key) => (
-                                                <MenuItem key={key} value={name} >{name}</MenuItem>
-                                                ))}
-                                        </Select>
-                                    </FormControl>
-
-                                    <FormControl style={{gridArea:'City'}} fullWidth>
-                                        <InputLabel id="City-label" color='error' required>City</InputLabel>
-                                        <Select id="city" labelId="City-label" name="city" label="City*" value={Address.city} color='error' required 
-                                            onChange={(e) => {setAddress({...Address, [e.target.name] : e.target.value});}}>
-                                            <MenuItem key="default" value="Default" disabled>Select City</MenuItem>
-                                            {cityList.map((name, key) => (
-                                                <MenuItem key={key} value={name} >{name}</MenuItem>
-                                            ))}
-                                        </Select>
-                                    </FormControl>
-
-                                    <TextField id="pincode" label="Pincode" name="pincode" value={Address.pincode} style={{gridArea:'Pin'}} autoComplete="pincode" color='error' fullWidth required 
-                                        onChange={(e) => {setAddress({...Address, [e.target.name] : e.target.value});}} 
-                                        InputProps={{
-                                            inputComponent: TextMaskCustom
-                                        }}
-                                    />
 
                                     <TextField id="password" type={showPassword ? 'text' : 'password'} label="Password" name="password" value={Detail.password} style={{gridArea:'Pass'}} autoComplete="new-password" color='error' fullWidth required 
                                         onChange={(e) => {e.persist(); setDetail({...Detail, [e.target.name] : e.target.value});}} 
@@ -295,7 +182,7 @@ export default function SignUp() {
 
                                 <Grid container justifyContent="flex-end">
                                     <Grid item>
-                                        <Link href="/SignIn" variant="body2" color='#c6414c'>
+                                        <Link href="/signin" variant="body2" color='#c6414c'>
                                             Already have an account? Sign in
                                         </Link>
                                     </Grid>
@@ -308,8 +195,8 @@ export default function SignUp() {
                     <Avatar sx={{ width:80, height:80, bgcolor: "#c6414c" }}>
                         <HowToRegTwoToneIcon sx={{ width:50, height:50 }} />
                     </Avatar>
-                    <h3 style={{marginBottom:'0px', color:'#c6414c'}}>Registration As Donor</h3>
-                    <h1 style={{margin:'0px', fontSize:'40px'}}>Your Donation Can Make Someone’s Life Better</h1>
+                    <h3 style={{marginBottom:'0px', color:'#c6414c'}}>Registration As User</h3>
+                    <h1 style={{margin:'0px', fontSize:'40px'}}>We Are Here To Help</h1>
                     <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco 
                     </p>
@@ -318,22 +205,3 @@ export default function SignUp() {
         </>
     )
 }
-
-
-
-
-
-
-
-
-// function Copyright(props) {
-//     return (
-//         <Typography variant="body2" color="text.secondary" align="center" {...props}>
-//             {"Copyright © "}<Link to="/" color="inherit" underline="none">BConnect</Link>{" "}{new Date().getFullYear()}{"."}
-//         </Typography>
-//     );
-// }
-
-// <Typography component="h1" variant="h5" fontWeight={{fontWeight:"bolder"}}>
-//     Sign Up
-// </Typography>
