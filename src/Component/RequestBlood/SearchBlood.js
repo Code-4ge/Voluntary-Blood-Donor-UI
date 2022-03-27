@@ -194,7 +194,7 @@ export default function SearchBlood() {
 			if(AuthenticationService.isUserLoggedIn())
 			{
 				setRequestSpinner(false);
-				console.log('redirect to Request details page');
+				window.location.replace('/send-Request');
 			}
 			else{
 				Swal.fire({
@@ -248,7 +248,7 @@ export default function SearchBlood() {
 
 	return (
 		<>
-		<div className="search_donor_container" style={{backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/searchblbg.png'})`}}>
+		<div className="search_donor_container" style={{backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/search-bg.svg'})`}}>
 			<section>
 				<h1><span>Search</span> for <span>Blood Donor</span></h1>
 			</section>
@@ -323,6 +323,7 @@ export default function SearchBlood() {
 						components={{
 							Pagination: CustomPagination,
 							NoRowsOverlay: CustomNoRowsOverlay,
+							NoResultsOverlay: CustomNoRowsOverlay,
 						}}
 					/>
 					<Button variant="contained" onClick={() => handleRequestSubmit()} sx={{ mt: 2, mb: 2, pl:4, pr:4, fontSize:'15px', fontWeight:'bold', backgroundColor:"#c6414c",':hover': {bgcolor: '#c6414c'} }} > 

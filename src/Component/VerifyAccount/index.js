@@ -38,14 +38,14 @@ function VerifyAccount() {
         var icon = 'error';
         var title = 'Confirmation failed!';
         var text = 'There might be some issue with your account please register again.';
-        var url = '/SignUp';
+        var url = 'donors/signup';
 
         if(isConfirm)
         {
             icon = 'success';
             title = 'Good job!';
-            text = 'Your have successfully registered as BConnect Donor.';
-            url = '/SignIn';
+            text = 'Your have successfully registered as BloodDonor Member.';
+            url = '/singin';
         }
         Swal.fire({
             icon: icon,

@@ -19,6 +19,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import validator from 'validator';
 
 import "./SignIn_Up.css"
+import UserService from "../../Service/UserService";
 
 
 export default function SignIn() {
@@ -56,7 +57,15 @@ export default function SignIn() {
                     if(AuthenticationService.registerSuccessfulLogin(response.data))
                     {
                         setSpinner(false);
-                        window.open('/dashboard', '_self')
+                        if(UserService.isDonorSelected())
+                        {
+                            console.log("enter to send request");
+                            window.open('/send-request', '_self');
+                        }
+                        else{
+                            console.log("enter to dashboard");
+                            window.open('/dashboard', '_self');
+                        }
                         // history.replace('/dashboard');
                         // window.location.reload();
                     }

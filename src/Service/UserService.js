@@ -21,11 +21,24 @@ class UserService{
     }
 
     getRequestDonor(){
-        sessionStorage.getItem(USER_REQUEST_DONOR_SESSION_ATTRIBUTE_NAME);
+        return sessionStorage.getItem(USER_REQUEST_DONOR_SESSION_ATTRIBUTE_NAME);
     }
 
     deleteRequestDonor(){
         sessionStorage.removeItem(USER_REQUEST_DONOR_SESSION_ATTRIBUTE_NAME);
+    }
+
+    sendRequest(request){
+        console.log(request);
+        return axios.post(`${API_URL}/bloodRequests/request`, request, {
+            headers: AuthenticationService.authHeader()
+        });
+    }
+
+    isDonorSelected(){
+        if (this.getRequestDonor() === null) 
+            return false;
+        return true;
     }
 }
 
