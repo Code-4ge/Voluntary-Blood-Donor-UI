@@ -14,3 +14,4 @@ BloodDonor promotes voluntary blood donations.
 - Spring Security
 - Spring Data JPA
 - PostgreSQL
+- Twilio Api
