@@ -59,10 +59,10 @@ export default function () {
         whatsapp:"",
         gender:"",
         age:"",
-        unitRequired:"",
+        unitsRequired:"",
         streetAddress:"",
         city:"",
-        govermentId:"",
+        governmentId:"",
         donors:userService.getRequestDonor().split(','),
     });
     const [errorMsg, seterrorMsg] = useState()
@@ -115,7 +115,7 @@ export default function () {
                                         onChange={(e) => {e.persist(); setPatientDetail({...patientDetail, [e.target.name] : e.target.value});}} 
                                     />
 
-                                    <TextField id="unitRequired"  label="Units Required"  name="unitRequired" value={patientDetail.unitRequired} style={{gridArea:'Unit'}}  color='error' fullWidth required
+                                    <TextField id="unitsRequired"  label="Units Required"  name="unitsRequired" value={patientDetail.unitsRequired} style={{gridArea:'Unit'}}  color='error' fullWidth required
                                         onChange={(e) => {setPatientDetail({...patientDetail, [e.target.name] : e.target.value});}} 
                                         InputProps={{
                                             inputComponent: TextMaskCustom
@@ -184,7 +184,7 @@ export default function () {
                                         </Select>
                                     </FormControl>
 
-                                    <TextField id="govermentId"  label="Addhar/PAN Card Number"  name="govermentId" value={patientDetail.govermentId} style={{gridArea:'G_Id'}}  color='error' placeholder='Enter addhar/pan card number without space' fullWidth 
+                                    <TextField id="governmentId"  label="Addhar/PAN Card Number"  name="governmentId" value={patientDetail.governmentId} style={{gridArea:'G_Id'}}  color='error' placeholder='Enter addhar/pan card number without space' fullWidth 
                                         onChange={(e) => {setPatientDetail({...patientDetail, [e.target.name] : e.target.value});}} 
                                         InputProps={{
                                             inputComponent: TextMaskCustom

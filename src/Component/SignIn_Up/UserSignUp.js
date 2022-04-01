@@ -198,7 +198,7 @@ export default function UserSignUp() {
                     <h3 style={{marginBottom:'0px', color:'#c6414c'}}>Registration As User</h3>
                     <h1 style={{margin:'0px', fontSize:'40px'}}>We Are Here To Help</h1>
                     <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco 
+                    The one reason donors say they give blood is because they "want to help others". If you began donating blood at age 18 and donated every 90 days until you reached 60, you would have donated 30 gallons of blood, potentially helping save more than 500 lives!
                     </p>
                 </div>
             </div>

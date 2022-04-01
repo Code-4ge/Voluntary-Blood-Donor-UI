@@ -29,7 +29,7 @@ export const Header = () => {
 		</svg>
 		<div ref={header_height} id='header' className="header">
 			<div className='title'>
-				<h1>EVERY BLOOD DONOR <br/>IS A LIFE SAVER</h1>
+				<h1 style={{fontSize:"45px"}}>EVERY BLOOD DONOR <br/>IS A LIFE SAVER</h1>
 				<p>
 					<span>"Your greatness is <br/>not what you have. <br />it's what you give"<br/></span>
 				</p>
@@ -81,7 +81,7 @@ export const Info = () => {
 								<img src={process.env.PUBLIC_URL + '/assets/fact3.png'} alt="Fact" />
 							</div>
 							<p>
-								Adults have around 10 units of blood in their body. 1 unit is given during during a donation.
+								Adults have around 10 units of blood in their body. 1 unit is given during a donation.
 							</p>
 						</section>
 						<section className='infoDetails'>

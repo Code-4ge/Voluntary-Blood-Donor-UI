@@ -311,7 +311,7 @@ export default function SignUp() {
                     <h3 style={{marginBottom:'0px', color:'#c6414c'}}>Registration As Donor</h3>
                     <h1 style={{margin:'0px', fontSize:'40px'}}>Your Donation Can Make Someone’s Life Better</h1>
                     <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco 
+                    The one reason donors say they give blood is because they "want to help others". Enjoy the feeling of accomplishment knowing that you have helped to save lives. Your gift of blood may help up to three people.
                     </p>
                 </div>
             </div>
