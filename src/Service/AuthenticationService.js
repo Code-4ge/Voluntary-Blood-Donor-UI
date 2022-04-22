@@ -7,8 +7,6 @@ export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'SESSIONauth';
 
 class AuthenticationService{
 
-
-
     executeJWTAuthenticationService(Users){
         return axios.post(`${API_URL}/appUsers/signin`, Users );
     }

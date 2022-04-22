@@ -47,7 +47,12 @@ TextMaskCustom.propTypes = {
 
 
 
-export default function () {
+export default function RequestForm() {
+
+    if(!userService.isDonorSelected())
+    {
+        window.location.replace("/search-for-blood");
+    }
 
     const { data } = State_City_Data;
     const stateList = Object.keys(data);
@@ -65,7 +70,8 @@ export default function () {
         governmentId:"",
         donors:userService.getRequestDonor().split(','),
     });
-    const [errorMsg, seterrorMsg] = useState()
+    const [Msg, setMsg] = useState();
+    const [msgColor, setMsgColor] = useState();
     const [Alert, setAlert] = useState(false);
     const [submitSpinner, setSubmitSpinner] = useState(false);
     const BlTypes = [ 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
@@ -77,19 +83,22 @@ export default function () {
         setSubmitSpinner(true);
         userService.sendRequest(patientDetail)
         .then((res) => {
-            console.log(res);
             setSubmitSpinner(false);
+            setAlert(true);
+            setMsg("Successfully Sent");
+            setMsgColor("success");
             userService.deleteRequestDonor();
         })
         .catch((err) => {
+            setSubmitSpinner(false);
+            setAlert(true);
+            setMsg("Failed to send request!");
+            setMsgColor("error");
             console.log(err);
         });
     };
 
     const handleCloseAlert = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
         setAlert(false);
     };
 
@@ -102,8 +111,8 @@ export default function () {
                 <div className='request-container'>
                     <h1>Your Are One Step Away to Request <br/><span>Fill Patient Details</span></h1>
                     <Snackbar open={Alert} autoHideDuration={10000} onClick={handleCloseAlert} onClose={handleCloseAlert} anchorOrigin={{vertical:'top', horizontal:'right'}} sx={{mt:6}}>
-                        <MuiAlert elevation={6} variant="filled" severity="error" sx={{ width: '100%' }}>
-                            {errorMsg}
+                        <MuiAlert elevation={6} variant="filled" severity={msgColor} sx={{ width: '100%' }}>
+                            {Msg}
                         </MuiAlert>
                     </Snackbar>
                     <Card sx={{ width:"fit-content", padding:"15px", margin:"auto"}}>

@@ -28,5 +28,4 @@ yarn-error.log*
 
 #files
 package-lock.json
-/package.json
-/requirments.json
+requirments.json
