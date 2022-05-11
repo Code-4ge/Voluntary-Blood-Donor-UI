@@ -1,4 +1,195 @@
 .dashboard{
+    padding: 120px 50px 100px;
+    background-color: #f5f5f5;
+}
+
+.user-detail{
+    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.detail-card{
+    width: fit-content;
+    padding: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    gap: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px 2px #ebebeb;
+    background-color: white;
+}
+
+.details{
+    display :flex;
+    flex-wrap :nowrap;
+    gap: 15px;
+    font-size: 14px;
+}
+
+.details div p {
+    margin: 10px 0 !important;
+}
+
+.user-card{
+    width: 250px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px 2px #ebebeb;
+    overflow: hidden;
+    background-color: white;
+    background: linear-gradient(300deg, rgb(189, 0, 255), rgb(189, 0, 255), rgb(91, 14, 255));
+}
+
+.blur-card{
+    position: absolute;
+    width: 250px;
+    height: 135px;
+    border-radius: 5px;
+    filter: blur(4px);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#card-vector1{
+    position: absolute;
+    width: 250px;
+    height: 80px;
+    margin-top: 55px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+}
+
+#card-vector2{
+    position: absolute;
+    width: 90px;
+    height: 135px;
+    margin-left: 160px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
+}
+
+.user-card-details{
+    position: absolute;
+    padding: 0 20px;
+    font-size: 16px;
+    font-family: monospace;
+    color: white;
+}
+
+.logo2{
+    position: absolute;
+    width: 75px;
+    height: 25px;
+    margin: calc(135px - 35px) 0 0 calc(250px - 90px);
+}
+
+#block-card{
+    position: absolute;
+    width: 250px;
+    height: 135px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+}
+
+.non-donor{
+    margin-top: 50px;
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #ffc7005e;
+    border-radius: 20px;
+}
+
+#donor-btn{
+    cursor: pointer;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    background-color: #FF2431;
+}
+
+.blood-needed{
+    margin-top: 50px;
+    padding: 30px;
+}
+
+#section-title{
+    font-weight: 600;
+    font-size: 21px;
+    color: #6A6A6A;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.needed-card{
+    display:flex;
+    flex-wrap: wrap;
+    padding: 0 20px;
+    gap: 60px;
+}
+
+
+
+/* Recived Request file style*/
+
+.recived-card{
+    width: 300px;
+    height: 200px;
+    border-radius: 5px;
+    background-color: white;
+    overflow: hidden;
+}
+
+.sender-section{
+    height: 70%;
+    padding: 20px 0 0 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 15px;
+    border-radius: 5px 5px 0 0;
+}
+
+.sender-section div p{
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+.recived-action{
+    height: 20%;
+}
+
+.responce-btn{
+    cursor: pointer;
+    width: 50%;
+    height: 100%;
+    border: none;
+}
+
+#accept{
+    background: rgba(35, 150, 33, 0.71);
+    border-radius: 0px 0px 0px 5px;
+}
+
+#decline{
+    background: #E75252;
+    border-radius: 0px 0px 5px 0px;
+}
+
+
+
+
+
+
+/* .dashboard{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -50,14 +241,14 @@
     border-radius: 5px;
     color: whitesmoke;
     background-color: #ffa57b;
-    /* background-color: #ff7839; */
+    /* background-color: #ff7839;
 }
 
-
+*/
 
 /* Blood request recivied style */
 
-.services{
+/* .services{
     grid-area: Service;
     height: fit-content;
     display: flex;
@@ -109,18 +300,18 @@
 
 /* Blood request send status if recipent */
 
-.request_sent{
+/* .request_sent{
     grid-area: Request;
     height: fit-content;
     font-size: 18px;
     font-weight: 600;
     color: #7a7a7a;
-}
+} */
 
 
 /* Notification div style */
 
-.notification{
+/* .notification{
     grid-area: Notify;
     padding-top: 120px;
     align-self: flex-end;
@@ -155,4 +346,4 @@
     margin-left: 7px;
     border-radius: 5px;
     background-color: white;
-}
+} */

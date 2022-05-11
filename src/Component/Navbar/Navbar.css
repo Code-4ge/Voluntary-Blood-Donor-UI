@@ -4,13 +4,14 @@ nav{
     padding: 7px 100px;
     display: flex;
     text-align: center;
+    align-items: center;
     justify-content: space-between;
     background-color: white;
 }
 
-nav img{
-    width: 180px;
-    height: 35px;
+#logo{
+    width: 200px;
+    height: 50px;
 }
 
 .sidenav{
@@ -65,90 +66,3 @@ nav img{
     color: #c6414c;
 }
 
-
-
-
-
-/* .sidenav a{
-    margin-right: 60px;
-    line-height: 55px;
-    text-decoration: none;
-    font-size: 15px;
-    color: #f30000;
-    display: block;
-}
-
-.sidenav a:hover{
-    color: black;
-}
-
-.sidenav button{
-    width: 200px;
-    height: 35px;
-    padding: 5px 15px;
-    margin: auto 50px auto 35%;
-    background-color: #f30000;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-weight: bold;
-    box-shadow: 0 8px 6px -4px grey;
-}
-
-
-.sidenav .closebtn{
-    display: none;
-}
-
-.openbtn{
-    color: black;
-    display: none;
-}
-
-@media screen and (max-width: 800px)
-{
-    .sidenav{
-        width: 0;
-        height: 100%;
-        position: fixed;
-        display: block;
-        z-index: 1;
-        padding-top: 65px;
-        overflow-x: hidden;
-        text-align: center;
-        background-color: black;
-    }
-    .sidenav a{
-        margin: 25px 10px 40px 0;
-        font-size: 20px;
-        color: white;
-    }
-    .sidenav a:hover{
-        color: red;
-    }
-    .sidenav .closebtn{
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        right: 30px;
-        font-size: 36px;
-        margin-left: 50px;
-        display: block;
-    }
-    .sidenav button{
-        margin: 0 !important;
-        box-shadow: none;
-    }
-    nav img {
-        width: 170px;
-        height: 50px;
-        margin: 10px 0 0 20px;
-    }
-    .openbtn {
-        cursor: pointer;
-        font-size: 30px;
-        padding: 0%;
-        margin: 20px 50px 0 0;
-        display: block;
-    }
-} */

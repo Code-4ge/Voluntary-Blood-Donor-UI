@@ -3,7 +3,8 @@ import AuthenticationService from "./AuthenticationService";
 
 const API_URL = 'http://localhost:8080/api';
 
-const USER_REQUEST_DONOR_SESSION_ATTRIBUTE_NAME = 'RequestedDonors'
+const USER_REQUEST_DONOR_SESSION_ATTRIBUTE_NAME = 'RequestedDonors';
+const USER_NAME = "userName";
 
 
 class UserService{
@@ -39,6 +40,14 @@ class UserService{
         if (this.getRequestDonor() === null) 
             return false;
         return true;
+    }
+
+    setUsername(userName){
+        sessionStorage.setItem(USER_NAME, userName)
+    }
+
+    getUsername(){
+        return sessionStorage.getItem(USER_NAME)
     }
 }
 

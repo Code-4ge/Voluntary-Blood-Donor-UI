@@ -54,7 +54,9 @@ export default function SignIn() {
         else{
             AuthenticationService.executeJWTAuthenticationService(Users)
                 .then((response) => {
-                    if(AuthenticationService.registerSuccessfulLogin(response.data))
+                    console.log(response)
+                    UserService.setUsername(response.data.name)
+                    if(AuthenticationService.registerSuccessfulLogin(response.data.token))
                     {
                         setSpinner(false);
                         if(UserService.isDonorSelected())
@@ -68,6 +70,7 @@ export default function SignIn() {
                         }
                         // history.replace('/dashboard');
                         // window.location.reload();
+                        console.log("Login Done!!")
                     }
                 }).catch((error) => {
                     console.log(error)
