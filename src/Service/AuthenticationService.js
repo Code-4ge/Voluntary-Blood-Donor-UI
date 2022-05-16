@@ -1,4 +1,5 @@
 import axios from 'axios';
+import jwt_decode from "jwt-decode";
 
 const API_URL = 'http://localhost:8080/api';
 
@@ -12,15 +13,11 @@ class AuthenticationService{
     }
 
     authHeader(){
-        const JwtToken = sessionStorage.getItem('SESSIONauth');
+        const JwtToken = sessionStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
         if(JwtToken)
             return {Authorization: this.createJWTAuthToken(JwtToken)};
         else
             return {};
-    }
-
-    getUserRoles(){
-        
     }
 
     createJWTAuthToken(token){
@@ -38,6 +35,12 @@ class AuthenticationService{
         if (user === null) 
             return false;
         return true;
+    }
+
+    getUserRoles(){
+        const J_Token = sessionStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
+        var decoded_token = jwt_decode(J_Token);
+        return decoded_token.roles;
     }
     
     logout() {

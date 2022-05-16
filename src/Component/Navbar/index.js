@@ -6,6 +6,7 @@ import AuthenticationService from '../../Service/AuthenticationService';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
 import Menu from '@mui/material/Menu';
+import UserService from '../../Service/UserService'
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Person from '@mui/icons-material/Person';
 import MenuItem from '@mui/material/MenuItem';
@@ -40,6 +41,8 @@ function HideOnScroll(props) {
   };
 
 export default function Navbar() {
+
+  const [userName, setuserName] = useState(UserService.getUsername());
 
   const [LoggedIn, setLoggedIn] = useState(false)
   const [useranchorEl, setuserAnchorEl] = useState(null);
@@ -114,9 +117,9 @@ export default function Navbar() {
 
                           
                           <Stack id="user-button" aria-controls={openUserDropdown ? 'user-menu' : undefined} aria-haspopup="true" aria-expanded={openUserDropdown ? 'true' : undefined} onClick={handleDropdownClick} direction="row" spacing={1} sx={{cursor:'pointer'}} title="Account settings">
-                            <Avatar sx={{ width: 40, height: 40, bgcolor:'#c6414c' }} {...stringAvatar('Neeraj Panmand')} />
+                            <Avatar sx={{ width: 40, height: 40, bgcolor:'#c6414c' }} {...stringAvatar(userName)} />
                             <Paper elevation={0} sx={{display:"flex", justifyContent:"center", alignItems:"center", textAlign:"center", verticalAlign:"middle", fontSize:'17px'}}>
-                              Neeraj Panmand
+                              {userName}
                             </Paper>
                           </Stack>
                           <Menu

@@ -54,8 +54,8 @@ export default function SignIn() {
         else{
             AuthenticationService.executeJWTAuthenticationService(Users)
                 .then((response) => {
-                    console.log(response)
-                    UserService.setUsername(response.data.name)
+                    console.log(response.data)
+                    UserService.setUserDetails(response.data)
                     if(AuthenticationService.registerSuccessfulLogin(response.data.token))
                     {
                         setSpinner(false);
@@ -143,7 +143,7 @@ export default function SignIn() {
                                         </Link>
                                     </Grid>
                                     <Grid item>
-                                        <Link href="/SignUp" variant="body2" color='#c6414c'>
+                                        <Link href="/donors/signup" variant="body2" color='#c6414c'>
                                             Don't have an account? Sign Up
                                         </Link>
                                     </Grid>

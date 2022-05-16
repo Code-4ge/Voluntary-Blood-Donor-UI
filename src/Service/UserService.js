@@ -5,6 +5,12 @@ const API_URL = 'http://localhost:8080/api';
 
 const USER_REQUEST_DONOR_SESSION_ATTRIBUTE_NAME = 'RequestedDonors';
 const USER_NAME = "userName";
+const USER_MAIL = "userMail";
+const USER_AGE = "userAge";
+const USER_ADDRESS = "userAddress";
+const USER_MOBILE = "userMobile";
+const USER_BLOOD = "userBloodGroup";
+
 
 
 class UserService{
@@ -42,12 +48,37 @@ class UserService{
         return true;
     }
 
-    setUsername(userName){
-        sessionStorage.setItem(USER_NAME, userName)
+    setUserDetails(UserDetails){
+        sessionStorage.setItem(USER_NAME, UserDetails.name);
+        sessionStorage.setItem(USER_MAIL, UserDetails.email);
+        sessionStorage.setItem(USER_AGE, UserDetails.age);
+        sessionStorage.setItem(USER_BLOOD, UserDetails.bloodGroup);
+        sessionStorage.setItem(USER_ADDRESS, UserDetails.address);
+        sessionStorage.setItem(USER_MOBILE, UserDetails.mobile);
     }
 
     getUsername(){
-        return sessionStorage.getItem(USER_NAME)
+        return sessionStorage.getItem(USER_NAME);
+    }
+    getUserEmail()
+    {
+        return sessionStorage.getItem(USER_MAIL);
+    }
+    getUserAge()
+    {
+        return sessionStorage.getItem(USER_AGE);
+    }
+    getUserAdress()
+    {
+        return sessionStorage.getItem(USER_ADDRESS);
+    }
+    getUserBloodGroup()
+    {
+        return sessionStorage.getItem(USER_BLOOD);
+    }
+    getUserMobile()
+    {
+        return sessionStorage.getItem(USER_MOBILE);
     }
 }
 

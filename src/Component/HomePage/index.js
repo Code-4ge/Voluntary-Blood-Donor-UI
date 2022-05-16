@@ -118,7 +118,7 @@ export const Contact = () => {
 					<span>Join Us</span><br/>
 					Together We Can Make World More Health & Better
 				</p>
-				<button>Contact Us</button>
+				<a href='mailto: blood.donor@mail.com' rel="noopener noreferrer">Contact Us</a>
 			</div>
 		</>
 	);

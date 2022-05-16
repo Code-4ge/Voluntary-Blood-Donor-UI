@@ -175,13 +175,18 @@
   color: #c6414c;
 }
 
-.contact button {
+.contact a {
   width: 160px;
   height: 35px;
+  display: flex;
+  cursor: pointer;
   color: #c6414c;
   font-weight: bold;
-  border: 1px solid #ed0000;
-  box-sizing: border-box;
   border-radius: 3px;
+  align-items: center;
+  text-decoration: none;
+  box-sizing: border-box;
+  justify-content: center;
   background-color: white;
+  border: 1px solid #ed0000;
 }
