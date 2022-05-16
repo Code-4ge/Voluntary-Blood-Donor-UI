@@ -16,7 +16,7 @@ export default function About() {
 		    </div>
         <div className='about'>
           <div>
-            <span id='aboutTag'>Who Are We?</span>
+            <span className='aboutTag'>Who Are We?</span>
             <section id='subTag'>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit.Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit.Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit.</section>
             <Grid
               container
@@ -44,7 +44,7 @@ export default function About() {
           <hr/>
 
           <div>
-            <span id='aboutTag'>Why We?</span>
+            <span className='aboutTag'>Why We?</span>
             <div className="cardholder">
               <div className="card">
                 <img
@@ -102,75 +102,60 @@ export default function About() {
               </div>
             </div>
           </div>
+          <br />
+          <br />
+          <br />
+          {/* <hr /> */}
+          <br />
+          <br />
+          <br />
+          <div>
+            <span className='aboutTag' style={{letterSpacing:"2px"}}>OUR TEAM</span>
+            <div className="cardholder">
+              <div className="member">
+                <div className="image" style={{background:`linear-gradient(180deg, rgba(0, 0, 0, 0.041), rgba(23, 85, 177, 0.233), rgba(241, 85, 228, 0.342)), url(${process.env.PUBLIC_URL + '/assets/team/neeraj.jpeg'})`}}>
+                    <h3>Coder</h3>
+                </div>
+                <section className="member-details">
+                    <span>Neeraj Panmand</span>
+                    <p>panmnandneeraj@gmail.com</p>
+                    <section id="link">
+                        <a href="https://in.linkedin.com/in/neeraj-panmand" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/Neeraj27200" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                    </section>
+                </section>
+              </div>
+
+              <div className="member">
+                <div className="image" style={{background:`linear-gradient(180deg, rgba(0, 0, 0, 0.041), rgba(23, 85, 177, 0.233), rgba(241, 85, 228, 0.342)), url(${process.env.PUBLIC_URL + '/assets/team/tushar.jpeg'})`}}>
+                    <h3>Coder</h3>
+                </div>
+                <section className="member-details">
+                    <span>Tushar Sangle</span>
+                    <p>tusharsangle@gmail.com</p>
+                    <section id="link">
+                        <a href="https://in.linkedin.com/in/neeraj-panmand" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/Neeraj27200" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                    </section>
+                </section>
+              </div>
+
+              <div className="member">
+                <div className="image" style={{background:`linear-gradient(180deg, rgba(0, 0, 0, 0.041), rgba(23, 85, 177, 0.233), rgba(241, 85, 228, 0.342)), url(${process.env.PUBLIC_URL + '/assets/team/taha.jpg'})`}}>
+                    <h3>Coder</h3>
+                </div>
+                <section className="member-details">
+                    <span>Gulam Taha Yaseen</span>
+                    <p>gulamtahayaseen@gmail.com</p>
+                    <section id="link">
+                        <a href="https://in.linkedin.com/in/neeraj-panmand" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/Neeraj27200" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                    </section>
+                </section>
+              </div>
+            </div>
+          </div>
+
         </div>
         <Contact />
       </>
   )
 }
 
-
-
-
-
-// <div className="about">
-//         <p>Why We?</p>
-        // <div className="cardholder">
-        //   <div className="card">
-        //     <section>
-        //       <img
-        //         id="search"
-        //         src="https://www.ublood.com/assets/images/home-images/search.png"
-        //         alt="Geo-Location"
-        //       />
-        //       Geo-Location Search
-        //     </section>
-        //     <section>
-        //       Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-        //       aut fugit, sed quia consequuntur magni dolores eos qui ratione
-        //       voluptatem sequi nesciunt. Neque porro quisquam est.
-        //     </section>
-        //   </div>
-        //   <div className="card">
-        //     <section>
-        //       <img
-        //         src="https://www.ublood.com/assets/images/home-images/hands.png"
-        //         alt="Geo-Location"
-        //       />
-        //       Real Time Connect
-        //     </section>
-        //     <section>
-        //       Amet, consectetur adipiscing elit, sed do eiusmod tempor
-        //       incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        //       veniam, quis nostrud exercitation ullamco laboris nisi.
-        //     </section>
-        //   </div>
-        //   <div className="card">
-        //     <section>
-        //       <img
-        //         src="https://www.ublood.com/assets/images/home-images/bell.png"
-        //         alt="Geo-Location"
-        //       />
-        //       Notification
-        //     </section>
-        //     <section>
-        //       Consequuntur magni dolores eos qui ratione voluptatem sequi
-        //       nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor
-        //       sit amet, consectetur, adipisci velit, sed quia non numquam.
-        //     </section>
-        //   </div>
-        //   <div className="card">
-        //     <section>
-        //       <img
-        //         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBMz3p1RTfOWclaWp3uIyg4NiOjgP64hZ9vvu3mH-xQWHavzKYksd_huYxwGMVONwtEIU&usqp=CAU"
-        //         alt="Geo-Location"
-        //       />
-        //       User Friendly
-        //     </section>
-        //     <section>
-        //       Eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam
-        //       est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
-        //       velit, sed quia non numquam eius modi tempora.
-        //     </section>
-        //   </div>
-        // </div>
-//       </div>
