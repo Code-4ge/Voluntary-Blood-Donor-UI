@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { useParams } from 'react-router-dom';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 import RegistrationService from '../../Service/RegistrationService';
 
 
@@ -63,7 +65,11 @@ function VerifyAccount() {
     }
 
     return Loading ? (
-        <div></div>
+        <div>
+            <Box sx={{ display: 'flex' }}>
+                <CircularProgress />
+            </Box>
+        </div>
     ):(
         <>
             {template(isConfirm)}

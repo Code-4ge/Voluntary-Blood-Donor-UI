@@ -54,7 +54,6 @@ export default function SignIn() {
         else{
             AuthenticationService.executeJWTAuthenticationService(Users)
                 .then((response) => {
-                    console.log(response.data)
                     UserService.setUserDetails(response.data)
                     if(AuthenticationService.registerSuccessfulLogin(response.data.token))
                     {

@@ -1,15 +1,16 @@
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 
-const API_URL = 'http://localhost:8080/api';
 
-export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'SESSIONauth';
+const USER_NAME_SESSION_ATTRIBUTE_NAME = 'SESSIONauth';
 
 
 class AuthenticationService{
+    
+    API_URL = 'http://localhost:8080/api';
 
     executeJWTAuthenticationService(Users){
-        return axios.post(`${API_URL}/appUsers/signin`, Users );
+        return axios.post(`${this.API_URL}/appUsers/signin`, Users );
     }
 
     authHeader(){
