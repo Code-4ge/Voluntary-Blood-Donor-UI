@@ -113,40 +113,40 @@ export default function About() {
             <span className='aboutTag' style={{letterSpacing:"2px"}}>OUR TEAM</span>
             <div className="cardholder">
               <div className="member">
-                <div className="image" style={{background:`linear-gradient(180deg, rgba(0, 0, 0, 0.041), rgba(23, 85, 177, 0.233), rgba(241, 85, 228, 0.342)), url(${process.env.PUBLIC_URL + '/assets/team/neeraj.jpeg'})`}}>
-                    <h3>Coder</h3>
+                <div className="image" style={{background:`linear-gradient(180deg, rgba(0, 0, 0, 0.041), rgba(23, 85, 177, 0.233), rgba(241, 85, 228, 0.342)), url(${process.env.PUBLIC_URL + '/assets/team/neeraj.jpg'})`}}>
+                    {/* <h3>Developer</h3> */}
                 </div>
                 <section className="member-details">
                     <span>Neeraj Panmand</span>
-                    <p>panmnandneeraj@gmail.com</p>
+                    <p>Software Developer</p>
                     <section id="link">
-                        <a href="https://in.linkedin.com/in/neeraj-panmand" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/Neeraj27200" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        <a href="https://in.linkedin.com/in/neeraj-panmand" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/Code-4ge" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
                     </section>
                 </section>
               </div>
 
               <div className="member">
                 <div className="image" style={{background:`linear-gradient(180deg, rgba(0, 0, 0, 0.041), rgba(23, 85, 177, 0.233), rgba(241, 85, 228, 0.342)), url(${process.env.PUBLIC_URL + '/assets/team/tushar.jpeg'})`}}>
-                    <h3>Coder</h3>
+                    {/* <h3>Developer</h3> */}
                 </div>
                 <section className="member-details">
                     <span>Tushar Sangle</span>
-                    <p>tusharsangle@gmail.com</p>
+                    <p>Software Developer</p>
                     <section id="link">
-                        <a href="https://in.linkedin.com/in/neeraj-panmand" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/Neeraj27200" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/tushar-sangle" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/TusharSangle" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
                     </section>
                 </section>
               </div>
 
               <div className="member">
                 <div className="image" style={{background:`linear-gradient(180deg, rgba(0, 0, 0, 0.041), rgba(23, 85, 177, 0.233), rgba(241, 85, 228, 0.342)), url(${process.env.PUBLIC_URL + '/assets/team/taha.jpg'})`}}>
-                    <h3>Coder</h3>
+                    {/* <h3>Developer</h3> */}
                 </div>
                 <section className="member-details">
                     <span>Gulam Taha Yaseen</span>
-                    <p>gulamtahayaseen@gmail.com</p>
+                    <p>Software Developer</p>
                     <section id="link">
-                        <a href="https://in.linkedin.com/in/neeraj-panmand" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/Neeraj27200" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/taha-yasin/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/taha-yasin" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
                     </section>
                 </section>
               </div>
